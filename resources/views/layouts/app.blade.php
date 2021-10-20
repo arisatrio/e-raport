@@ -20,9 +20,13 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/libs/select2/dist/css/select2.min.css') }}"> --}}
     <link href="{{asset('assets/extra-libs/pace-progress/themes/yellow/pace-theme-flash.css')}}" rel="stylesheet">
     
-    @yield('extra-css')
+    @stack('extra-css')
     <link href="{{ asset('dist/css/style.min.css') }}" rel="stylesheet">
-    
+    <style>
+        .bg-kaneza {
+            background-color: #017cc2;
+        }
+    </style>
 </head>
     <body>
         <div id="main-wrapper">
@@ -53,7 +57,7 @@
     <!--Custom JavaScript -->
     <script src="{{ asset('dist/js/custom.js') }}"></script>
     <!--This page JavaScript -->
-    <script src="{{ asset('assets/libs/select2/dist/js/select2.full.min.js') }}"></script>
+    {{-- <script src="{{ asset('assets/libs/select2/dist/js/select2.full.min.js') }}"></script>
     <script src="{{ asset('assets/libs/select2/dist/js/select2.min.js') }}"></script>
     <script src="{{ asset('dist/js/pages/forms/select2/select2.init.js') }}"></script>
     <!--chartis chart-->
@@ -62,9 +66,10 @@
     <!--c3 charts -->
     <script src="{{ asset('assets/extra-libs/c3/d3.min.js') }}"></script>
     <script src="{{ asset('assets/extra-libs/c3/c3.min.js') }}"></script>
-    <script src="{{ asset('assets/extra-libs/moment/moment.js') }}"></script>
     <!-- Sweetalert2 -->
-    <script src="{{ asset('assets/libs/sweetalert2/dist/sweetalert2.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/sweetalert2/dist/sweetalert2.min.js') }}"></script> --}}
+    <script src="{{ asset('assets/extra-libs/moment/moment.js') }}"></script>
     <script src="{{asset('assets/extra-libs/pace-progress/pace.min.js')}}"></script>
+    @stack('extra-js')
     </body>
 </html>

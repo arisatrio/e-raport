@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,6 +20,9 @@ Route::get('/', function () {
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::prefix('admin')->name('admin.')->group(function (){
         Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'homeAdmin'])->name('dashboard');
+
+        //
+        Route::resource('tahun-ajaran', Controllers\Admin\MTahunAjaranController::class);
     });
 });
 
