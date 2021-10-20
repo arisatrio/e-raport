@@ -24,13 +24,31 @@
                             </a>
                         </li>
                         <li class="sidebar-item"> 
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="true">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('admin.jurusan.index') }}" aria-expanded="true">
                                 <i class="mdi mdi-adjust"></i><span class="hide-menu">Jurusan</span>
                             </a>
                         </li>
                         <li class="sidebar-item"> 
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="true">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('admin.kelas.index') }}" aria-expanded="true">
                                 <i class="mdi mdi-adjust"></i><span class="hide-menu">Kelas</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <li class="sidebar-item"> 
+                    <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+                        <i class="mdi mdi-file-document"></i><span class="hide-menu">Mata Pelajaran</span>
+                    </a>
+                    <ul aria-expanded="true" class="collapse first-level">
+                        <li class="sidebar-item"> 
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="true">
+                                <i class="mdi mdi-adjust"></i><span class="hide-menu">Golongan</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item"> 
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="true">
+                                <i class="mdi mdi-adjust"></i><span class="hide-menu">Mata Pelajaran</span>
                             </a>
                         </li>
                     </ul>
@@ -62,12 +80,6 @@
                 <li class="sidebar-item"> 
                     <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
                         <i class="mdi mdi-file-document"></i><span class="hide-menu">Siswa</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-item"> 
-                    <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
-                        <i class="mdi mdi-file-document"></i><span class="hide-menu">Mata Pelajaran</span>
                     </a>
                 </li>
                 {{-- <li class="sidebar-item">

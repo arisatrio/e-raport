@@ -3,12 +3,12 @@
 @section('content')
 <x-page-header>
     @slot('page_title')
-        Tahun Ajaran
+        Kelas
     @endslot
     @slot('breadcrumb')
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-            <li class="breadcrumb-item">Tahun Ajaran</li>
+            <li class="breadcrumb-item">Kelas</li>
         </ol>
     @endslot
 </x-page-header>
@@ -16,7 +16,7 @@
 <x-page-content>
 
     @slot('header')
-        <h4>Tahun Ajaran</h4>
+        <h4>Kelas</h4>
     @endslot
 
     @slot('content')
@@ -40,8 +40,8 @@
 
         <x-datatable>
             @slot('header')
-                <button class="btn btn-success" data-toggle="modal" data-target="#modal-create"><i class="fas fa-plus"></i> Tambah Tahun Ajaran</button>
-                @include('layouts._modal-create',['data' => 'Tahun Ajaran', 'route' => 'admin.tahun-ajaran.store'])
+                <button class="btn btn-success" data-toggle="modal" data-target="#modal-create"><i class="fas fa-plus"></i> Tambah Kelas</button>
+                @include('layouts._modal-create', ['data' => 'Kelas', 'route' => 'admin.kelas.store'])
             @endslot
 
             @slot('table_content')
@@ -49,21 +49,23 @@
                     <tr>
                         <th width="5%">No</th>
                         <th>Tahun Ajaran</th>
+                        <th>Kelas</th>
                         <th width="15%">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($ta as $item)
+                    @foreach ($kelas as $item)
                         <tr>
                             <td>{{$loop->iteration}}</td>
-                            <td>{{$item->tahun_ajaran}}</td>
+                            <td>{{$item->tahunAjaran->tahun_ajaran}}</td>
+                            <td>{{$item->kelas}} - {{$item->jurusan->kode_jurusan}}</td>
                             <td>
                                 <button class="btn btn-secondary" data-toggle="modal" data-target="#modal-detail-{{ $item->id }}"><i class="fas fa-eye"></i></button>
                                 <button class="btn btn-warning" data-toggle="modal" data-target="#modal-edit-{{ $item->id }}"><i class="fas fa-pencil-alt"></i></button>
                                 <button class="btn btn-danger" data-toggle="modal" data-target="#modal-delete-{{ $item->id }}"><i class="fas fa-trash"></i></button>
-                                @include('layouts._modal-show', ['data' => 'Tahun Ajaran', 'tahun_ajaran' => $item->tahun_ajaran])
-                                @include('layouts._modal-edit', ['data' => 'Tahun Ajaran', 'route' => 'admin.tahun-ajaran.update'])
-                                @include('layouts._modal-delete', ['data' => 'Tahun Ajaran', 'itemDel' => $item->tahun_ajaran, 'route' => 'admin.tahun-ajaran.destroy'])
+                                @include('layouts._modal-show', ['data' => 'Kelas', 'tahun_ajaran' => $item->tahunAjaran->tahun_ajaran, 'jurusan' => $item->jurusan->jurusan, 'kelas' => $item->kelas])
+                                @include('layouts._modal-edit', ['data' => 'Kelas', 'route' => 'admin.kelas.update', 'itemTahun_ajaran' => $item->m_tahun_ajarans_id, 'itemJurusan' => $item->m_jurusans_id, 'kelas' => $item->kelas])
+                                @include('layouts._modal-delete', ['data' => 'Kelas', 'itemDel' => $item->kelas.' '.$item->jurusan->jurusan.' '.$item->tahunAjaran->tahun_ajaran, 'route' => 'admin.tahun-ajaran.destroy'])
                             </td>
                         </tr>
                     @endforeach

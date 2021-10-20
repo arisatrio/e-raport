@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Models\MTahunAjaran;
+use App\Models\MJurusan;
 
-class MTahunAjaranController extends Controller
+class MJurusanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +16,9 @@ class MTahunAjaranController extends Controller
      */
     public function index()
     {
-        $ta = MTahunAjaran::all();
+        $jurusan = MJurusan::all();
 
-        return view('_admin.MTahunAjaran.index', compact('ta'));
+        return view('_admin.MJurusan.index', compact('jurusan'));
     }
 
     /**
@@ -30,11 +30,12 @@ class MTahunAjaranController extends Controller
     public function store(Request $request)
     {
         $data = $this->validate($request, [
-            'tahun_ajaran' => 'required',
+            'jurusan'   => 'required',
+            'kode_jurusan'  => 'required',
         ]);
-        MTahunAjaran::create($data);
+        MJurusan::create($data);
 
-        return redirect()->route('admin.tahun-ajaran.index')->with('messages', 'Data Tahun Ajaran berhasil disimpan');
+        return redirect()->route('admin.jurusan.index')->with('messages', 'Data Jurusan berhasil disimpan');
     }
 
     /**
@@ -47,12 +48,13 @@ class MTahunAjaranController extends Controller
     public function update(Request $request, $id)
     {
         $data = $this->validate($request, [
-            'tahun_ajaran'  => 'required',
+            'jurusan'   => 'required',
+            'kode_jurusan'  => 'required',
         ]);
-        $ta = MTahunAjaran::find($id);
-        $ta->update($data);
+        $jurusan = MJurusan::find($id);
+        $jurusan->update($data);
 
-        return redirect()->route('admin.tahun-ajaran.index')->with('messages', 'Data Tahun Ajaran berhasil diubah');
+        return redirect()->route('admin.jurusan.index')->with('messages', 'Data Jurusan berhasil diubah');
     }
 
     /**
@@ -63,9 +65,9 @@ class MTahunAjaranController extends Controller
      */
     public function destroy($id)
     {
-        $ta = MTahunAjaran::find($id);
-        $ta->delete();
+        $jurusan = MJurusan::find($id);
+        $jurusan->delete();
 
-        return redirect()->route('admin.tahun-ajaran.index')->with('messages', 'Data Tahun Ajaran berhasil dihapus');
+        return redirect()->route('admin.jurusan.index')->with('messages', 'Data Jurusan berhasil dihapus');        
     }
 }

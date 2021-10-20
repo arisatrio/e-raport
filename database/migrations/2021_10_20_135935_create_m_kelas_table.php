@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMTahunAjaransTables extends Migration
+class CreateMKelasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateMTahunAjaransTables extends Migration
      */
     public function up()
     {
-        Schema::create('m_tahun_ajarans', function (Blueprint $table) {
+        Schema::create('m_kelas', function (Blueprint $table) {
             $table->id();
-            $table->string('tahun_ajaran');
+            $table->foreignId('m_tahun_ajarans_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('m_jurusans_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->string('kelas');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -28,6 +30,6 @@ class CreateMTahunAjaransTables extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('m_tahun_ajarans');
+        Schema::dropIfExists('m_kelas');
     }
 }

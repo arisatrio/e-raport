@@ -22,7 +22,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'homeAdmin'])->name('dashboard');
 
         //
-        Route::resource('tahun-ajaran', Controllers\Admin\MTahunAjaranController::class);
+        Route::resource('tahun-ajaran', Controllers\Admin\MTahunAjaranController::class)->only(['index', 'store', 'update', 'destroy']);
+        Route::resource('jurusan', Controllers\Admin\MJurusanController::class)->only(['index', 'store', 'update', 'destroy']);
+        Route::resource('kelas', Controllers\Admin\MKelasController::class)->only(['index', 'store', 'update', 'destroy']);
     });
 });
 
