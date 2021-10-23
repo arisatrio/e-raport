@@ -15,9 +15,9 @@ class CreateMKelasTable extends Migration
     {
         Schema::create('m_kelas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('m_tahun_ajarans_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('m_jurusans_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->string('kelas');
+            $table->string('tingkat');
+            $table->string('ruangan');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -19,11 +19,29 @@ class User extends Authenticatable
      * @var string[]
      */
     protected $fillable = [
+        'role_id',
         'name',
+        'username',
         'email',
-        'roles_id',
         'password',
+        'nohp',
     ];
+
+    public function isAdmin(){
+        return (\Auth::user()->role_id == 1);
+    }
+
+    public function isWalas(){
+        return (\Auth::user()->role_id == 2);
+    }
+
+    public function isGuru(){
+        return (\Auth::user()->role_id == 3);
+    }
+
+    public function isMurid(){
+        return (\Auth::user()->role_id == 4);
+    }
 
     /**
      * The attributes that should be hidden for serialization.

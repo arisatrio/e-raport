@@ -20,23 +20,7 @@
     @endslot
 
     @slot('content')
-        @if (session('messages'))
-        <div class="alert alert-success alert-dismissible">
-            {{ session('messages') }}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        @endif
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+        @include('layouts._alert')
 
         <x-datatable>
             @slot('header')
@@ -48,8 +32,7 @@
                 <thead class="bg-kaneza text-white">
                     <tr>
                         <th width="5%">No</th>
-                        <th>Tahun Ajaran</th>
-                        <th>Kelas</th>
+                        <th>Jurusan / Tingkat Kelas / Ruangan</th>
                         <th width="15%">Aksi</th>
                     </tr>
                 </thead>
@@ -57,15 +40,14 @@
                     @foreach ($kelas as $item)
                         <tr>
                             <td>{{$loop->iteration}}</td>
-                            <td>{{$item->tahunAjaran->tahun_ajaran}}</td>
-                            <td>{{$item->kelas}} - {{$item->jurusan->kode_jurusan}}</td>
+                            <td>{{$item->jurusan->jurusan}} / {{$item->tingkat}} {{$item->ruangan}}</td>
                             <td>
                                 <button class="btn btn-secondary" data-toggle="modal" data-target="#modal-detail-{{ $item->id }}"><i class="fas fa-eye"></i></button>
                                 <button class="btn btn-warning" data-toggle="modal" data-target="#modal-edit-{{ $item->id }}"><i class="fas fa-pencil-alt"></i></button>
                                 <button class="btn btn-danger" data-toggle="modal" data-target="#modal-delete-{{ $item->id }}"><i class="fas fa-trash"></i></button>
-                                @include('layouts._modal-show', ['data' => 'Kelas', 'tahun_ajaran' => $item->tahunAjaran->tahun_ajaran, 'jurusan' => $item->jurusan->jurusan, 'kelas' => $item->kelas])
-                                @include('layouts._modal-edit', ['data' => 'Kelas', 'route' => 'admin.kelas.update', 'itemTahun_ajaran' => $item->m_tahun_ajarans_id, 'itemJurusan' => $item->m_jurusans_id, 'kelas' => $item->kelas])
-                                @include('layouts._modal-delete', ['data' => 'Kelas', 'itemDel' => $item->kelas.' '.$item->jurusan->jurusan.' '.$item->tahunAjaran->tahun_ajaran, 'route' => 'admin.tahun-ajaran.destroy'])
+                                @include('layouts._modal-show', ['data' => 'Kelas'])
+                                @include('layouts._modal-edit', ['data' => 'Kelas', 'route' => 'admin.kelas.update'])
+                                {{-- @include('layouts._modal-delete', ['data' => 'Kelas', 'itemDel' => $item->kelas.' '.$item->jurusan->jurusan.' '.$item->tahunAjaran->tahun_ajaran, 'route' => 'admin.tahun-ajaran.destroy']) --}}
                             </td>
                         </tr>
                     @endforeach

@@ -18,7 +18,7 @@ class MKelasController extends Controller
      */
     public function index()
     {
-        $kelas      = MKelas::with('tahunAjaran', 'jurusan')->get();
+        $kelas      = MKelas::with('jurusan')->get();
         $ta         = MTahunAjaran::all();
         $jurusan    = MJurusan::all();
 
@@ -34,9 +34,9 @@ class MKelasController extends Controller
     public function store(Request $request)
     {
         $data = $this->validate($request, [
-            'm_tahun_ajarans_id'    => 'required',
             'm_jurusans_id'         => 'required',
-            'kelas'                 => 'required',
+            'tingkat'               => 'required',
+            'ruangan'               => 'required',
         ]);
         MKelas::create($data);
 
@@ -53,9 +53,9 @@ class MKelasController extends Controller
     public function update(Request $request, $id)
     {
         $data = $this->validate($request, [
-            'm_tahun_ajarans_id'    => 'required',
             'm_jurusans_id'         => 'required',
-            'kelas'                 => 'required',
+            'tingkat'               => 'required',
+            'ruangan'               => 'required',
         ]);
         $kelas = MKelas::find($id);
         $kelas->update($data);

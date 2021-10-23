@@ -10,8 +10,8 @@ class MJurusan extends Model
     use SoftDeletes;
     protected $fillable = ['jurusan', 'kode_jurusan'];
 
-    public function kelas()
+    public function mapelJurusan()
     {
-        return $this->hasManys(MKelas::class);
+        return $this->hasMany(MMapelJurusan::class);
     }
 }

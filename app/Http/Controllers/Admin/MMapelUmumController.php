@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Models\MTahunAjaran;
+use App\Models\MMapelUmum;
 
-class MTahunAjaranController extends Controller
+class MMapelUmumController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +16,9 @@ class MTahunAjaranController extends Controller
      */
     public function index()
     {
-        $ta = MTahunAjaran::all();
+        $mapel = MMapelUmum::all();
 
-        return view('_admin.MTahunAjaran.index', compact('ta'));
+        return view('_admin.MMapelUmum.index', compact('mapel'));
     }
 
     /**
@@ -30,12 +30,13 @@ class MTahunAjaranController extends Controller
     public function store(Request $request)
     {
         $data = $this->validate($request, [
-            'tahun_ajaran'  => 'required',
-            'semester'      => 'required',
+            'golongan'  => 'required',
+            'mapel'     => 'required',
+            'kkm'       => 'required|numeric',
         ]);
-        MTahunAjaran::create($data);
+        MMapelUmum::create($data);
 
-        return redirect()->route('admin.tahun-ajaran.index')->with('messages', 'Data Tahun Ajaran berhasil disimpan');
+        return redirect()->route('admin.mapel-umum.index')->with('messages', 'Data Mata Pelajaran Umum berhasil disimpan');
     }
 
     /**
@@ -48,13 +49,14 @@ class MTahunAjaranController extends Controller
     public function update(Request $request, $id)
     {
         $data = $this->validate($request, [
-            'tahun_ajaran'  => 'required',
-            'semester'      => 'required',
+            'golongan'  => 'required',
+            'mapel'     => 'required',
+            'kkm'       => 'required|numeric',
         ]);
-        $ta = MTahunAjaran::find($id);
-        $ta->update($data);
+        $mapel = MMapelUmum::find($id);
+        $mapel->update($data);
 
-        return redirect()->route('admin.tahun-ajaran.index')->with('messages', 'Data Tahun Ajaran berhasil diubah');
+        return redirect()->route('admin.mapel-umum.index')->with('messages', 'Data Mata Pelajaran Umum berhasil diubah');
     }
 
     /**
@@ -65,9 +67,9 @@ class MTahunAjaranController extends Controller
      */
     public function destroy($id)
     {
-        $ta = MTahunAjaran::find($id);
-        $ta->delete();
+        $mapel = MMapelUmum::find($id);
+        $mapel->delete();
 
-        return redirect()->route('admin.tahun-ajaran.index')->with('messages', 'Data Tahun Ajaran berhasil dihapus');
+        return redirect()->route('admin.mapel-umum.index')->with('messages', 'Data Mata Pelajaran Umum berhasil dihapus');
     }
 }

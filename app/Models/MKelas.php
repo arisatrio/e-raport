@@ -8,12 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class MKelas extends Model
 {
     use SoftDeletes;
-    protected $fillable = ['m_tahun_ajarans_id', 'm_jurusans_id', 'kelas'];
-
-    public function tahunAjaran()
-    {
-        return $this->belongsTo(MTahunAjaran::class, 'm_tahun_ajarans_id');
-    }
+    protected $fillable = ['m_jurusans_id', 'tingkat', 'ruangan'];
 
     public function jurusan()
     {

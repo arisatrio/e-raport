@@ -10,7 +10,7 @@
     <meta name="author" content="">
     
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon.ico') }}">
-    <title>E-RAPORT - SMKN 1 Jatibarang</title>
+    <title>E-RAPOR - SMKN 1 Jatibarang</title>
 
     <!-- Custom CSS -->
     {{-- <link href="{{ asset('assets/libs/chartist/dist/chartist.min.css') }}" rel="stylesheet">

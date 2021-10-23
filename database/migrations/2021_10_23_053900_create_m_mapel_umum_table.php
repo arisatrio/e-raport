@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMTahunAjaransTables extends Migration
+class CreateMMapelUmumTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateMTahunAjaransTables extends Migration
      */
     public function up()
     {
-        Schema::create('m_tahun_ajarans', function (Blueprint $table) {
+        Schema::create('m_mapel_umums', function (Blueprint $table) {
             $table->id();
-            $table->string('tahun_ajaran');
-            $table->string('semester');
+            $table->string('golongan');
+            $table->string('mapel');
+            $table->integer('kkm');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -29,6 +29,6 @@ class CreateMTahunAjaransTables extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('m_tahun_ajarans');
+        Schema::dropIfExists('m_mapel_umums');
     }
 }

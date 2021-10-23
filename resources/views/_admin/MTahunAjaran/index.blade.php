@@ -20,23 +20,7 @@
     @endslot
 
     @slot('content')
-        @if (session('messages'))
-        <div class="alert alert-success alert-dismissible">
-            {{ session('messages') }}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        @endif
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+        @include('layouts._alert')
 
         <x-datatable>
             @slot('header')
@@ -48,7 +32,7 @@
                 <thead class="bg-kaneza text-white">
                     <tr>
                         <th width="5%">No</th>
-                        <th>Tahun Ajaran</th>
+                        <th>Tahun Ajaran / Semester</th>
                         <th width="15%">Aksi</th>
                     </tr>
                 </thead>
@@ -56,7 +40,7 @@
                     @foreach ($ta as $item)
                         <tr>
                             <td>{{$loop->iteration}}</td>
-                            <td>{{$item->tahun_ajaran}}</td>
+                            <td>{{$item->tahun_ajaran}} {{$item->semester}}</td>
                             <td>
                                 <button class="btn btn-secondary" data-toggle="modal" data-target="#modal-detail-{{ $item->id }}"><i class="fas fa-eye"></i></button>
                                 <button class="btn btn-warning" data-toggle="modal" data-target="#modal-edit-{{ $item->id }}"><i class="fas fa-pencil-alt"></i></button>

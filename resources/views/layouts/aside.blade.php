@@ -15,7 +15,55 @@
 
                 <li class="sidebar-item"> 
                     <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
-                        <i class="mdi mdi-file-document"></i><span class="hide-menu">Kelas & Jurusan</span>
+                        <i class="mdi mdi-account"></i><span class="hide-menu"> Siswa</span>
+                    </a>
+                    <ul aria-expanded="true" class="collapse first-level">
+                        <li class="sidebar-item"> 
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="true">
+                                <i class="mdi mdi-adjust"></i><span class="hide-menu">Kelas X</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item"> 
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="true">
+                                <i class="mdi mdi-adjust"></i><span class="hide-menu">Kelas XI</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item"> 
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="true">
+                                <i class="mdi mdi-adjust"></i><span class="hide-menu">Kelas XII</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="sidebar-item"> 
+                    <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+                        <i class="mdi mdi-account"></i><span class="hide-menu">Guru</span>
+                    </a>
+                    <ul aria-expanded="true" class="collapse first-level">
+                        <li class="sidebar-item"> 
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="true">
+                                <i class="mdi mdi-adjust"></i><span class="hide-menu">Wali Kelas</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item"> 
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('admin.guru.index') }}" aria-expanded="true">
+                                <i class="mdi mdi-adjust"></i><span class="hide-menu">Guru</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item"> 
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="true">
+                                <i class="mdi mdi-adjust"></i><span class="hide-menu">BK</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <div class="dropdown-divider"></div>
+
+                <li class="sidebar-item"> 
+                    <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+                        <i class="mdi mdi-database"></i><span class="hide-menu">Master Data</span>
                     </a>
                     <ul aria-expanded="true" class="collapse first-level">
                         <li class="sidebar-item"> 
@@ -33,55 +81,24 @@
                                 <i class="mdi mdi-adjust"></i><span class="hide-menu">Kelas</span>
                             </a>
                         </li>
+                        <li class="sidebar-item"> 
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('admin.mapel-umum.index') }}" aria-expanded="true">
+                                <i class="mdi mdi-adjust"></i><span class="hide-menu">Umum</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item"> 
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('admin.mapel-jurusan.index') }}" aria-expanded="true">
+                                <i class="mdi mdi-adjust"></i><span class="hide-menu">Kejuruan</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item"> 
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('admin.ekstrakulikuler.index') }}" aria-expanded="true">
+                                <i class="mdi mdi-adjust"></i><span class="hide-menu">Ekstrakulikuler</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 
-                <li class="sidebar-item"> 
-                    <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
-                        <i class="mdi mdi-file-document"></i><span class="hide-menu">Mata Pelajaran</span>
-                    </a>
-                    <ul aria-expanded="true" class="collapse first-level">
-                        <li class="sidebar-item"> 
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="true">
-                                <i class="mdi mdi-adjust"></i><span class="hide-menu">Golongan</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item"> 
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="true">
-                                <i class="mdi mdi-adjust"></i><span class="hide-menu">Mata Pelajaran</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="sidebar-item"> 
-                    <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
-                        <i class="mdi mdi-file-document"></i><span class="hide-menu">Guru</span>
-                    </a>
-                    <ul aria-expanded="true" class="collapse first-level">
-                        <li class="sidebar-item"> 
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="true">
-                                <i class="mdi mdi-adjust"></i><span class="hide-menu">Wali Kelas</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item"> 
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="true">
-                                <i class="mdi mdi-adjust"></i><span class="hide-menu">Guru Mapel</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item"> 
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="true">
-                                <i class="mdi mdi-adjust"></i><span class="hide-menu">Guru BK</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="sidebar-item"> 
-                    <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
-                        <i class="mdi mdi-file-document"></i><span class="hide-menu">Siswa</span>
-                    </a>
-                </li>
                 {{-- <li class="sidebar-item">
                     <a class="waves-effect sidebar-link" href="#" aria-expanded="false">
                         <i class="fas fa-database"></i>

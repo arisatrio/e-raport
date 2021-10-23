@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Models\MTahunAjaran;
+use App\Models\MEskul;
 
-class MTahunAjaranController extends Controller
+class MEskulController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +16,9 @@ class MTahunAjaranController extends Controller
      */
     public function index()
     {
-        $ta = MTahunAjaran::all();
+        $eskul = MEskul::all();
 
-        return view('_admin.MTahunAjaran.index', compact('ta'));
+        return view('_admin.MEskul.index', compact('eskul'));
     }
 
     /**
@@ -30,12 +30,11 @@ class MTahunAjaranController extends Controller
     public function store(Request $request)
     {
         $data = $this->validate($request, [
-            'tahun_ajaran'  => 'required',
-            'semester'      => 'required',
+            'nama_eskul'    => 'required',
         ]);
-        MTahunAjaran::create($data);
+        MEskul::create($data);
 
-        return redirect()->route('admin.tahun-ajaran.index')->with('messages', 'Data Tahun Ajaran berhasil disimpan');
+        return redirect()->route('admin.ekstrakulikuler.index')->with('messages', 'Data Ekstrakulikuler berhasil disimpan');
     }
 
     /**
@@ -48,13 +47,12 @@ class MTahunAjaranController extends Controller
     public function update(Request $request, $id)
     {
         $data = $this->validate($request, [
-            'tahun_ajaran'  => 'required',
-            'semester'      => 'required',
+            'nama_eskul'    => 'required',
         ]);
-        $ta = MTahunAjaran::find($id);
-        $ta->update($data);
+        $eskul = MEskul::find($id);
+        $eskul->update($data);
 
-        return redirect()->route('admin.tahun-ajaran.index')->with('messages', 'Data Tahun Ajaran berhasil diubah');
+        return redirect()->route('admin.ekstrakulikuler.index')->with('messages', 'Data Ekstrakulikuler berhasil diubah');
     }
 
     /**
@@ -65,9 +63,9 @@ class MTahunAjaranController extends Controller
      */
     public function destroy($id)
     {
-        $ta = MTahunAjaran::find($id);
-        $ta->delete();
+        $eskul = MEskul::find($id);
+        $eskul->delete();
 
-        return redirect()->route('admin.tahun-ajaran.index')->with('messages', 'Data Tahun Ajaran berhasil dihapus');
+        return redirect()->route('admin.ekstrakulikuler.index')->with('messages', 'Data Ekstrakulikuler berhasil dihapus');
     }
 }
