@@ -32,6 +32,7 @@ class MTahunAjaranController extends Controller
         $data = $this->validate($request, [
             'tahun_ajaran'  => 'required',
             'semester'      => 'required',
+            'status'        => 'required',
         ]);
         MTahunAjaran::create($data);
 
@@ -50,6 +51,7 @@ class MTahunAjaranController extends Controller
         $data = $this->validate($request, [
             'tahun_ajaran'  => 'required',
             'semester'      => 'required',
+            'status'        => 'required',
         ]);
         $ta = MTahunAjaran::find($id);
         $ta->update($data);

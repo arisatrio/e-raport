@@ -21,7 +21,10 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::prefix('admin')->name('admin.')->group(function (){
         Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'homeAdmin'])->name('dashboard');
 
-        //
+        //KELAS
+        Route::resource('kelas-kelas', Controllers\Admin\KKelasController::class)->only(['index', 'store', 'update', 'destroy']);
+        Route::resource('kelas-siswa', Controllers\Admin\KKelasController::class)->only(['index', 'store', 'update', 'destroy']);
+        //MASTER
         Route::resource('tahun-ajaran', Controllers\Admin\MTahunAjaranController::class)->only(['index', 'store', 'update', 'destroy']);
         Route::resource('jurusan', Controllers\Admin\MJurusanController::class)->only(['index', 'store', 'update', 'destroy']);
         Route::resource('kelas', Controllers\Admin\MKelasController::class)->only(['index', 'store', 'update', 'destroy']);

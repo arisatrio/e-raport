@@ -43,6 +43,14 @@ class User extends Authenticatable
         return (\Auth::user()->role_id == 4);
     }
 
+    public function waliKelas()
+    {
+        return $this->belongsToMany(MKelas::class, 'k_kelas')
+        ->using(KKelas::class)
+        ->withPivot('ta')
+        ->withTimestamps();
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

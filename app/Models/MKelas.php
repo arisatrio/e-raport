@@ -14,4 +14,12 @@ class MKelas extends Model
     {
         return $this->belongsTo(MJurusan::class, 'm_jurusans_id');
     }
+
+    public function waliKelas()
+    {
+        return $this->belongsToMany(User::class, 'k_kelas')
+        ->using(KKelas::class)
+        ->withPivot('ta')
+        ->withTimestamps();
+    }
 }

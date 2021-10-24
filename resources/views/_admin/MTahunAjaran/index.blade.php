@@ -33,6 +33,7 @@
                     <tr>
                         <th width="5%">No</th>
                         <th>Tahun Ajaran / Semester</th>
+                        <th>Status</th>
                         <th width="15%">Aksi</th>
                     </tr>
                 </thead>
@@ -41,6 +42,7 @@
                         <tr>
                             <td>{{$loop->iteration}}</td>
                             <td>{{$item->tahun_ajaran}} {{$item->semester}}</td>
+                            <td>{{$item->status}}</td>
                             <td>
                                 <button class="btn btn-secondary" data-toggle="modal" data-target="#modal-detail-{{ $item->id }}"><i class="fas fa-eye"></i></button>
                                 <button class="btn btn-warning" data-toggle="modal" data-target="#modal-edit-{{ $item->id }}"><i class="fas fa-pencil-alt"></i></button>

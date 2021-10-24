@@ -23,14 +23,22 @@
                                 <option value="Genap">Genap</option>
                             </select>
                         </div>
+                        <div class="form-group row">
+                            <label for="email1" class="col-sm-4 control-label col-form-label">Status</label>
+                            <select class="form-control col-sm-8" name="status">
+                                <option selected disabled>--Status--</option>
+                                <option value="1">Aktif</option>
+                                <option value="0">Selesai</option>
+                            </select>
+                        </div>
                     @elseif ($data === 'Jurusan')
                         <div class="form-group row">
                             <label for="email1" class="col-sm-4 control-label col-form-label">Nama Jurusan</label>
-                            <input type="text" class="form-control col-sm-8" name="jurusan" required>
+                            <input type="text" class="form-control col-sm-8" name="jurusan" placeholder="Contoh: Teknik Komputer Jaringan" required>
                         </div>
                         <div class="form-group row">
                             <label for="email1" class="col-sm-4 control-label col-form-label">Kode Jurusan</label>
-                            <input type="text" class="form-control col-sm-8" name="kode_jurusan" required>
+                            <input type="text" class="form-control col-sm-8" name="kode_jurusan" placeholder="TKJ" required>
                         </div>
                     @elseif ($data === 'Kelas')
                         <div class="form-group row">
@@ -46,9 +54,9 @@
                             <label for="email1" class="col-sm-4 control-label col-form-label">Tingkat</label>
                             <select class="form-control col-sm-8" name="tingkat">
                                 <option selected disabled>--Tingkat--</option>
-                                <option value="10">10</option>
-                                <option value="11">11</option>
-                                <option value="12">12</option>
+                                <option value="X">X</option>
+                                <option value="XI">XI</option>
+                                <option value="XII">XII</option>
                             </select>
                         </div>
                         <div class="form-group row">
@@ -134,6 +142,34 @@
                         <div class="form-group row">
                             <label for="email1" class="col-sm-4 control-label col-form-label">No. HP</label>
                             <input type="text" class="form-control col-sm-8" name="nohp" placeholder="Contoh: 0812345678" required>
+                        </div>
+                    @elseif($data === 'Kelas Siswa')
+                        <div class="form-group row">
+                            <label for="email1" class="col-sm-4 control-label col-form-label">Tahun Ajaran</label>
+                            <select class="form-control col-sm-8" name="ta">
+                                <option selected disabled>--Tahun Ajaran--</option>
+                                @foreach ($ta as $t)
+                                <option value="{{$t->tahun_ajaran}}">{{$t->tahun_ajaran}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group row">
+                            <label for="email1" class="col-sm-4 control-label col-form-label">Kelas</label>
+                            <select class="form-control col-sm-8" name="m_kelas_id">
+                                <option selected disabled>--Kelas--</option>
+                                @foreach ($kelas as $k)
+                                <option value="{{$k->id}}">{{$k->tingkat}} {{$k->jurusan->kode_jurusan}} / {{$k->ruangan}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group row">
+                            <label for="email1" class="col-sm-4 control-label col-form-label">Wali Kelas</label>
+                            <select class="form-control col-sm-8" name="user_id">
+                                <option selected disabled>--Wali Kelas--</option>
+                                @foreach ($guru as $g)
+                                <option value="{{$g->id}}">{{$g->name}}</option>
+                                @endforeach
+                            </select>
                         </div>
                     @endif
                 </div>

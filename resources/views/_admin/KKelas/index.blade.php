@@ -3,12 +3,12 @@
 @section('content')
 <x-page-header>
     @slot('page_title')
-        Ruang Kelas
+        Kelas
     @endslot
     @slot('breadcrumb')
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-            <li class="breadcrumb-item">Ruang Kelas</li>
+            <li class="breadcrumb-item">Kelas</li>
         </ol>
     @endslot
 </x-page-header>
@@ -16,40 +16,50 @@
 <x-page-content>
 
     @slot('header')
-        <h4>Ruang Kelas</h4>
+        <h4>Kelas</h4>
     @endslot
 
     @slot('content')
         @include('layouts._alert')
+        <div class="alert alert-success">
+            <p>Akun Wali Kelas login ke sistem menggunakan Username <b>tingkat-kode jurusan-ruangan-tahun ajaran</b> (format huruf kecil) dan Password <b>@123456</b>. <br> <i>Contoh: Username <b>x-tkj-satu-2021/2022</b> Password <b>@123456</b></i></p>
+        </div>
 
         <x-datatable>
             @slot('header')
-                <button class="btn btn-success" data-toggle="modal" data-target="#modal-create"><i class="fas fa-plus"></i> Tambah Ruang Kelas</button>
-                @include('layouts._modal-create', ['data' => 'Kelas', 'route' => 'admin.kelas.store'])
+                <button class="btn btn-success" data-toggle="modal" data-target="#modal-create"><i class="fas fa-plus"></i> Tambah Kelas</button>
+                @include('layouts._modal-create',['data' => 'Kelas Siswa', 'route' => 'admin.kelas-siswa.store'])
             @endslot
 
             @slot('table_content')
                 <thead class="bg-kaneza text-white">
                     <tr>
                         <th width="5%">No</th>
-                        <th>Jurusan / Tingkat Kelas / Ruangan</th>
+                        <th>Tahun Ajaran</th>
+                        <th>Kelas</th>
+                        <th>Wali Kelas</th>
                         <th width="15%">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($kelas as $item)
+                        @foreach ($item->waliKelas as $walas)
                         <tr>
                             <td>{{$loop->iteration}}</td>
-                            <td>{{$item->jurusan->jurusan}} / {{$item->tingkat}} {{$item->ruangan}}</td>
+                            <td>{{$walas->pivot->ta}}</td>
+                            <td>{{$item->tingkat}} {{$item->jurusan->kode_jurusan}} / {{$item->ruangan}}</td>
+                            <td>{{$walas->name}}</td>
                             <td>
+                                <button class="btn btn-info bg-kaneza" data-toggle="modal" data-target="#modal-delete-{{ $item->id }}"><i class="mdi mdi-account-plus"></i> Tambah Siswa</button>
                                 <button class="btn btn-secondary" data-toggle="modal" data-target="#modal-detail-{{ $item->id }}"><i class="fas fa-eye"></i></button>
                                 <button class="btn btn-warning" data-toggle="modal" data-target="#modal-edit-{{ $item->id }}"><i class="fas fa-pencil-alt"></i></button>
                                 <button class="btn btn-danger" data-toggle="modal" data-target="#modal-delete-{{ $item->id }}"><i class="fas fa-trash"></i></button>
-                                @include('layouts._modal-show', ['data' => 'Kelas'])
-                                @include('layouts._modal-edit', ['data' => 'Kelas', 'route' => 'admin.kelas.update'])
-                                @include('layouts._modal-delete', ['data' => 'Kelas', 'itemDel' => '', 'route' => 'admin.kelas.destroy'])
+                                {{-- @include('layouts._modal-show', ['data' => 'Kelas Siswa'])
+                                @include('layouts._modal-edit', ['data' => 'Ekstrakulikuler', 'route' => 'admin.ekstrakulikuler.update'])
+                                @include('layouts._modal-delete',['data' => 'Ekstrakulikuler', 'itemDel' => $item->nama_eskul, 'route' => 'admin.ekstrakulikuler.destroy']) --}}
                             </td>
-                        </tr>
+                        </tr>                        
+                        @endforeach
                     @endforeach
                 </tbody>
             @endslot

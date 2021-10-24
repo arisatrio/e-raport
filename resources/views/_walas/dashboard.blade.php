@@ -22,12 +22,26 @@
             <div class="card">
                 <div class="card-body">
                     
-                    <h4>Halo Wali Kelas</h4>
+                    <h4>Halo {{auth()->user()->name}}</h4>
                     <hr>
 
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    
+                    <h4>Data Siswa</h4>
+                    <hr>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 @endsection

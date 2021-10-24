@@ -11,10 +11,10 @@
                 @csrf
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1"><i class="ti-email"></i></span>
+                        <span class="input-group-text" id="basic-addon1"><i class="ti-user"></i></span>
                     </div>
-                    <input type="email" name="email" value="{{ old('email') }}" required class="form-control form-control-lg @error('email') is-invalid @enderror" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1">
-                    @error('email')
+                    <input type="text" name="username" value="{{ old('username') }}" required class="form-control form-control-lg @error('username') is-invalid @enderror" placeholder="NIP/NISN/Username" aria-label="Email" aria-describedby="basic-addon1">
+                    @error('username')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
