@@ -4,10 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 use App\Models\User;
 
-class MGuruController extends Controller
+class MSiswaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +17,10 @@ class MGuruController extends Controller
      */
     public function index()
     {
-        $guru = User::where('role_id', 3)->get();
-        
-        return view('_admin.MGuru.index', compact('guru'));
+        $murid = User::where('role_id', 4)->get();
+        $t = range(Carbon::now()->year, 2020);
+
+        return view('_admin.MSiswa.index', compact('murid', 't'));
     }
 
     /**
@@ -32,19 +34,40 @@ class MGuruController extends Controller
         $this->validate($request, [
             'name'      => 'required',
             'username'  => 'required|unique:users,username',
-            'email'     => 'required|unique:users,email',
-            'nohp'      => 'required',
+            'angkatan'  => 'required'
         ]);
         User::create([
-            'role_id'   => 3,
+            'role_id'   => 4,
             'name'      => $request->name,
             'username'  => $request->username,
-            'email'     => $request->email,
+            'email'     => $request->username,
+            'angkatan'  => $request->angkatan,
             'password'  => bcrypt('@123456'),
-            'nohp'      => $request->nohp,
         ]);
 
-        return redirect()->route('admin.guru.index')->with('messages', 'Data Guru berhasil disimpan');
+        return redirect()->route('admin.siswa.index')->with('messages', 'Data Siswa Berhasil Ditambahkan');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
     }
 
     /**

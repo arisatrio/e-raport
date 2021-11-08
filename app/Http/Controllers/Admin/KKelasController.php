@@ -52,9 +52,9 @@ class KKelasController extends Controller
                 'password'  => bcrypt('@123456'),
             ]);
             $kelas->waliKelas()->attach($guru, ['ta' => $request->ta]);
-            return redirect()->route('admin.kelas-kelas.index')->with('messages', 'Data Kelas Siswa berhasil disimpan');
+            return redirect()->route('admin.kelas-siswa.index')->with('messages', 'Data Kelas Siswa berhasil disimpan');
         } else {
-            return redirect()->route('admin.kelas-kelas.index')->with('error', 'Data Kelas Siswa dan Wali Kelas sudah ada');
+            return redirect()->route('admin.kelas-siswa.index')->with('error', 'Data Kelas Siswa dan Wali Kelas sudah ada');
         }
     }
 
@@ -66,7 +66,11 @@ class KKelasController extends Controller
      */
     public function show($id)
     {
-        //
+        $kelas = MKelas::find($id);
+        $allSiswa = User::where('role_id', 4)->get();
+        $siswaKelas = MKelas::with('siswaKelas')->get();
+
+        return view('_admin.KKelas.show', compact('kelas', 'allSiswa', 'siswaKelas'));
     }
 
     /**

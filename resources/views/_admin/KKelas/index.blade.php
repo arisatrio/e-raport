@@ -50,9 +50,10 @@
                             <td>{{$item->tingkat}} {{$item->jurusan->kode_jurusan}} / {{$item->ruangan}}</td>
                             <td>{{$walas->name}}</td>
                             <td>
-                                <button class="btn btn-info bg-kaneza" data-toggle="modal" data-target="#modal-delete-{{ $item->id }}"><i class="mdi mdi-account-plus"></i> Tambah Siswa</button>
+                                <a href="{{ route('admin.kelas-siswa.show', $item->id) }}" class="btn btn-info bg-kaneza" ><i class="mdi mdi-account-plus"></i> Tambah Siswa</a>
                                 <button class="btn btn-secondary" data-toggle="modal" data-target="#modal-detail-{{ $item->id }}"><i class="fas fa-eye"></i></button>
-                                <button class="btn btn-warning" data-toggle="modal" data-target="#modal-edit-{{ $item->id }}"><i class="fas fa-pencil-alt"></i></button>
+                                {{-- <button class="btn btn-warning" data-toggle="modal" data-target="#modal-edit-{{ $item->id }}"><i class="fas fa-pencil-alt"></i></button> --}}
+                                <a href="{{ route('admin.kelas-siswa.show', $item->id) }}" class="btn btn-warning"><i class="fas fa-eye"></i></a>
                                 <button class="btn btn-danger" data-toggle="modal" data-target="#modal-delete-{{ $item->id }}"><i class="fas fa-trash"></i></button>
                                 {{-- @include('layouts._modal-show', ['data' => 'Kelas Siswa'])
                                 @include('layouts._modal-edit', ['data' => 'Ekstrakulikuler', 'route' => 'admin.ekstrakulikuler.update'])

@@ -22,4 +22,11 @@ class MKelas extends Model
         ->withPivot('ta')
         ->withTimestamps();
     }
+
+    public function siswaKelas()
+    {
+        return $this->belongsToMany(User::class, 'k_kelas_siswas')
+            ->using(KSiswa::class)
+            ->withTimestamps();
+    }
 }

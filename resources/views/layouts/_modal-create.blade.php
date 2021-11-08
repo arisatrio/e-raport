@@ -171,6 +171,24 @@
                                 @endforeach
                             </select>
                         </div>
+                    @elseif($data === 'Siswa')
+                        <div class="form-group row">
+                            <label for="email1" class="col-sm-4 control-label col-form-label">Nama Siswa</label>
+                            <input type="text" class="form-control col-sm-8" name="name" placeholder="Contoh: Abdul" required>
+                        </div>
+                        <div class="form-group row">
+                            <label for="email1" class="col-sm-4 control-label col-form-label">NISN</label>
+                            <input type="number" class="form-control col-sm-8" name="username" placeholder="Contoh: Abdul" required>
+                        </div>
+                        <div class="form-group row">
+                            <label for="email1" class="col-sm-4 control-label col-form-label">Tahun Angkatan</label>
+                            <select class="form-control col-sm-8" name="angkatan" id="angkatan">
+                                <option selected disabled>--Tahun Angkatan--</option>
+                                @foreach ($t as $item)
+                                <option value="{{ $item }}">{{ $item }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     @endif
                 </div>
                 <div class="modal-footer">

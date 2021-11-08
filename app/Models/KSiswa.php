@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class KSiswa extends Model
+class KSiswa extends Pivot
 {
-    use HasFactory;
+    protected $table = 'k_kelas_siswas';
+    protected $fillable = ['m_kelas_id', 'user_id'];
 }

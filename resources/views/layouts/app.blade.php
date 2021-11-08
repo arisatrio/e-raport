@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon.ico') }}">
     <title>E-RAPOR - SMKN 1 Jatibarang</title>
@@ -70,6 +71,16 @@
     <script src="{{ asset('assets/libs/sweetalert2/dist/sweetalert2.min.js') }}"></script> --}}
     <script src="{{ asset('assets/extra-libs/moment/moment.js') }}"></script>
     <script src="{{asset('assets/extra-libs/pace-progress/pace.min.js')}}"></script>
+    
+    <script>
+        $(function () {
+              $.ajaxSetup({
+                  headers: {
+                      'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
+                  }
+              })
+          });
+      </script>
     @stack('extra-js')
     </body>
 </html>

@@ -22,8 +22,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'homeAdmin'])->name('dashboard');
 
         //KELAS
-        Route::resource('kelas-kelas', Controllers\Admin\KKelasController::class)->only(['index', 'store', 'update', 'destroy']);
-        Route::resource('kelas-siswa', Controllers\Admin\KKelasController::class)->only(['index', 'store', 'update', 'destroy']);
+        Route::resource('kelas-siswa', Controllers\Admin\KKelasController::class);
+        Route::resource('add-siswa-to-kelas', Controllers\Admin\KKelasSiswaController::class);
         //MASTER
         Route::resource('tahun-ajaran', Controllers\Admin\MTahunAjaranController::class)->only(['index', 'store', 'update', 'destroy']);
         Route::resource('jurusan', Controllers\Admin\MJurusanController::class)->only(['index', 'store', 'update', 'destroy']);
@@ -33,6 +33,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::resource('ekstrakulikuler', Controllers\Admin\MEskulController::class)->only(['index', 'store', 'update', 'destroy']);
         //USER
         Route::resource('guru', Controllers\Admin\MGuruController::class)->only(['index', 'store', 'update', 'destroy']);
+        Route::resource('siswa', Controllers\Admin\MSiswaController::class)->only(['index', 'store', 'update', 'destroy']);
     });
 });
 

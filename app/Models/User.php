@@ -25,6 +25,9 @@ class User extends Authenticatable
         'email',
         'password',
         'nohp',
+        'alamat',
+        //
+        'angkatan',
     ];
 
     public function isAdmin(){
@@ -49,6 +52,13 @@ class User extends Authenticatable
         ->using(KKelas::class)
         ->withPivot('ta')
         ->withTimestamps();
+    }
+
+    public function siswaKelas()
+    {
+        return $this->belongsToMany(MKelas::class, 'k_kelas_siswas')
+            ->using(KSiswa::class)
+            ->withTimestamps();
     }
 
     /**

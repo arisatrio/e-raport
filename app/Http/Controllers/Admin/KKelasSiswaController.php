@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Models\User;
+use App\Models\MKelas;
 
-class MGuruController extends Controller
+class KKelasSiswaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +16,17 @@ class MGuruController extends Controller
      */
     public function index()
     {
-        $guru = User::where('role_id', 3)->get();
-        
-        return view('_admin.MGuru.index', compact('guru'));
+        //
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
     }
 
     /**
@@ -29,22 +37,36 @@ class MGuruController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name'      => 'required',
-            'username'  => 'required|unique:users,username',
-            'email'     => 'required|unique:users,email',
-            'nohp'      => 'required',
-        ]);
-        User::create([
-            'role_id'   => 3,
-            'name'      => $request->name,
-            'username'  => $request->username,
-            'email'     => $request->email,
-            'password'  => bcrypt('@123456'),
-            'nohp'      => $request->nohp,
-        ]);
+        $kelas = MKelas::with('siswaKelas')->find($request->idKelas);
 
-        return redirect()->route('admin.guru.index')->with('messages', 'Data Guru berhasil disimpan');
+        $kelas->siswaKelas()->attach($request->selectedSiswa);
+
+        return response()->json([
+            'success'   => true,
+            'messages'  => 'Success',
+        ]);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
     }
 
     /**

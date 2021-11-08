@@ -25,23 +25,23 @@
                             <i class="mdi mdi-account"></i><span class="hide-menu">User</span>
                         </a>
                         <ul aria-expanded="true" class="collapse first-level">
-                            <li class="sidebar-item"> 
+                            {{-- <li class="sidebar-item"> 
                                 <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="true">
                                     <i class="mdi mdi-adjust"></i><span class="hide-menu">Wali Kelas</span>
                                 </a>
-                            </li>
+                            </li> --}}
                             <li class="sidebar-item"> 
                                 <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('admin.guru.index') }}" aria-expanded="true">
                                     <i class="mdi mdi-adjust"></i><span class="hide-menu">Guru</span>
                                 </a>
                             </li>
-                            <li class="sidebar-item"> 
+                            {{-- <li class="sidebar-item"> 
                                 <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="true">
                                     <i class="mdi mdi-adjust"></i><span class="hide-menu">BK</span>
                                 </a>
-                            </li>
+                            </li> --}}
                             <li class="sidebar-item"> 
-                                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="true">
+                                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('admin.siswa.index') }}" aria-expanded="true">
                                     <i class="mdi mdi-adjust"></i><span class="hide-menu">Siswa</span>
                                 </a>
                             </li>
@@ -101,6 +101,28 @@
                         <a class="waves-effect sidebar-link" href="#" aria-expanded="false">
                             <i class="mdi mdi-plus"></i>
                             <span class="hide-menu">Input Penilaian Sikap</span>
+                        </a>
+                    </li>
+                @elseif(auth()->user()->isMurid())
+                    <li class="sidebar-item">
+                        <a class="waves-effect sidebar-link" href="#" aria-expanded="false">
+                            <i class="mdi mdi-view-dashboard"></i>
+                            <span class="hide-menu">Dashboard</span>
+                        </a>
+                    </li>
+
+                    <div class="dropdown-divider"></div>
+
+                    <li class="sidebar-item">
+                        <a class="waves-effect sidebar-link" href="#" aria-expanded="false">
+                            <i class="mdi mdi-database"></i>
+                            <span class="hide-menu">Rapor Saya</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="waves-effect sidebar-link" href="#" aria-expanded="false">
+                            <i class="mdi mdi-account"></i>
+                            <span class="hide-menu">Biodata Saya</span>
                         </a>
                     </li>
                 @endif

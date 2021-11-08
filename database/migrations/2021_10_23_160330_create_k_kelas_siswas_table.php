@@ -15,9 +15,8 @@ class CreateKKelasSiswasTable extends Migration
     {
         Schema::create('k_kelas_siswas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('k_kelas_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->string('nisn');
-            $table->string('nama_siswa');
+            $table->foreignId('m_kelas_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
