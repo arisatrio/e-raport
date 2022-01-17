@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\MMapelUmum;
+use App\Models\User;
 
 class MMapelUmumController extends Controller
 {
@@ -16,9 +17,10 @@ class MMapelUmumController extends Controller
      */
     public function index()
     {
-        $mapel = MMapelUmum::all();
+        $mapel = MMapelUmum::with('guru')->get();
+        $guru = User::where('role_id', 3)->get();
 
-        return view('_admin.MMapelUmum.index', compact('mapel'));
+        return view('_admin.MMapelUmum.index', compact('mapel', 'guru'));
     }
 
     /**
@@ -30,6 +32,7 @@ class MMapelUmumController extends Controller
     public function store(Request $request)
     {
         $data = $this->validate($request, [
+            'guru_id'   => 'required',
             'golongan'  => 'required',
             'mapel'     => 'required',
             'kkm'       => 'required|numeric',

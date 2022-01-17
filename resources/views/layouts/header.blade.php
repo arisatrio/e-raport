@@ -26,11 +26,6 @@
                         <i class="mdi mdi-menu font-24"></i>
                     </a>
                 </li>
-                <li class="nav-item d-none d-md-block">
-                    <a class="nav-link waves-effect waves-light" href="javascript:void(0)">
-                        TA
-                    </a>
-                </li>
             </ul>
             <ul class="navbar-nav float-right">
                 <li class="nav-item dropdown">

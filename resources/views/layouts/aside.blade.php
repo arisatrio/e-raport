@@ -114,7 +114,7 @@
                     <div class="dropdown-divider"></div>
 
                     <li class="sidebar-item">
-                        <a class="waves-effect sidebar-link" href="#" aria-expanded="false">
+                        <a class="waves-effect sidebar-link" href="{{ route('murid.rapor.index') }}" aria-expanded="false">
                             <i class="mdi mdi-database"></i>
                             <span class="hide-menu">Rapor Saya</span>
                         </a>

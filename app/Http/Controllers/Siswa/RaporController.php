@@ -1,13 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Siswa;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Models\MKelas;
+use App\Models\MTahunAjaran;
+use App\Models\MMapelUmum;
+use App\Models\MMapelJurusan;
 
-class KKelasSiswaController extends Controller
+class RaporController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +18,11 @@ class KKelasSiswaController extends Controller
      */
     public function index()
     {
-        //
+        $ta = MTahunAjaran::where('status', 1)->first();
+        $mapelUmum = MMapelUmum::all();
+        // $mapelJurusan = MMapelJurusan::where('m_jurusan_id', auth()->user()->siswaKelas->first()->);
+
+        return view('_murid.rapor', compact('mapelUmum', 'ta'));
     }
 
     /**
@@ -37,14 +43,7 @@ class KKelasSiswaController extends Controller
      */
     public function store(Request $request)
     {
-        $kelas = MKelas::with('siswaKelas', 'waliKelas')->find($request->idKelas);
-
-        $kelas->siswaKelas()->attach($request->selectedSiswa, ['ta' => $kelas->waliKelas->first()->pivot->ta]);
-
-        return response()->json([
-            'success'   => true,
-            'messages'  => 'Success',
-        ]);
+        //
     }
 
     /**

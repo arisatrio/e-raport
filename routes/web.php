@@ -52,6 +52,7 @@ Route::middleware(['auth', 'guru'])->group(function () {
 Route::middleware(['auth', 'murid'])->group(function () {
     Route::prefix('murid')->name('murid.')->group(function (){
         Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'homeMurid'])->name('dashboard');
+        Route::resource('rapor', Controllers\Siswa\RaporController::class);
     });
 });
 

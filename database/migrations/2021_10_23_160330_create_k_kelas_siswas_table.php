@@ -17,6 +17,7 @@ class CreateKKelasSiswasTable extends Migration
             $table->id();
             $table->foreignId('m_kelas_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->string('ta');
             $table->timestamps();
         });
     }

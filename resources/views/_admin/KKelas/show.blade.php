@@ -9,7 +9,7 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
             <li class="breadcrumb-item"><a href="{{ route('admin.kelas-siswa.index') }}">Kelas</a></li>
-            <li class="breadcrumb-item">Kelas {{ $kelas->tingkat }} {{ $kelas->jurusan->kode_jurusan }} / {{ $kelas->ruangan }}</li>
+            <li class="breadcrumb-item">Kelas {{ $kelas->tingkat }} {{ $kelas->jurusan->kode_jurusan }} / {{ $kelas->ruangan }} {{ $kelas->waliKelas->first()->pivot->ta }}</li>
         </ol>
     @endslot
 </x-page-header>

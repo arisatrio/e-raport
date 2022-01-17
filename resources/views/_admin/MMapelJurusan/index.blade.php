@@ -37,6 +37,7 @@
                         <th>Golongan</th>
                         <th>Mata Pelajaran</th>
                         <th>KKM</th>
+                        <th>Guru</th>
                         <th width="15%">Aksi</th>
                     </tr>
                 </thead>
@@ -49,6 +50,7 @@
                             <td>{{$item->golongan}}</td>
                             <td>{{$item->mapel}}</td>
                             <td>{{$item->kkm}}</td>
+                            <td>{{ $item->guru->name }}</td>
                             <td>
                                 <button class="btn btn-secondary" data-toggle="modal" data-target="#modal-detail-{{ $item->id }}"><i class="fas fa-eye"></i></button>
                                 <button class="btn btn-warning" data-toggle="modal" data-target="#modal-edit-{{ $item->id }}"><i class="fas fa-pencil-alt"></i></button>

@@ -16,11 +16,14 @@ class CreateMMapelJurusanTable extends Migration
         Schema::create('m_mapel_jurusans', function (Blueprint $table) {
             $table->id();
             $table->foreignId('m_jurusans_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->unsignedBigInteger('guru_id');
             $table->string('golongan');
             $table->string('mapel');
             $table->string('tingkat');
             $table->integer('kkm');
             $table->timestamps();
+            
+            $table->foreign('guru_id')->references('id')->on('users');
         });
     }
 

@@ -15,10 +15,13 @@ class CreateMMapelUmumTable extends Migration
     {
         Schema::create('m_mapel_umums', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('guru_id');
             $table->string('golongan');
             $table->string('mapel');
             $table->integer('kkm');
             $table->timestamps();
+
+            $table->foreign('guru_id')->references('id')->on('users');
         });
     }
 

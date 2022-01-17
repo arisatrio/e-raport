@@ -58,6 +58,7 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(MKelas::class, 'k_kelas_siswas')
             ->using(KSiswa::class)
+            ->withPivot('ta')
             ->withTimestamps();
     }
 

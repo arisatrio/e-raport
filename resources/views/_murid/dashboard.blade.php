@@ -18,12 +18,12 @@
 
 <div class="container-fluid">
 
-    <div class="row">
-        <div class="col">
-            <div class="card shadow" style="height: 170px;">
+    <div class="row mb-4">
+        <div class="col-lg-4 col-sm-12">
+            <div class="card shadow h-100">
                 <div class="card-body">
                     <h4>{{ auth()->user()->name }}</h4>
-                    <p class="mb-0">{{ auth()->user()->username }}</p>
+                    <p class="mb-0">NISN : {{ auth()->user()->username }}</p>
                     <p class="mb-0">Tahun Angkatan {{ auth()->user()->angkatan }}</p>
                     <small>{{ auth()->user()->alamat }}</small>
                     {{ auth()->user()->siswaKelas->first()->jurusan->jurusan }}
@@ -31,8 +31,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-8">
-            <div class="card shadow" style="height: 170px;">
+        <div class="col-lg-8 col-sm-12">
+            <div class="card shadow h-100">
                 <div class="card-body">
                     <h4>Selamat Datang</h4>
                     <p>Selamat datang di website e-rapor untuk Siswa SMKN 1 Jatibarang ini. website e-rapor ini digunakan oleh siswa untuk memudahkan akses terhadap nilai rapor melalui internet.</p>
@@ -47,7 +47,7 @@
             <div class="card shadow">
                 <div class="card-body">
                     <h4>Mata Pelajaran</h4>
-                    <p>Kelas / Semester</p>
+                    <p>{{ auth()->user()->siswaKelas->first()->tingkat }} {{ auth()->user()->siswaKelas->first()->jurusan->kode_jurusan }} {{ auth()->user()->siswaKelas->first()->ruangan }} / Semester {{ $ta->semester }} {{ $ta->tahun_ajaran }}</p>
                     <hr>
 
                     <div class="table-responsive">
@@ -60,10 +60,16 @@
                                 </tr>
                             </thead>
                             <tbody>
-
+                                @foreach ($mapel as $item)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $item->mapel }}</td>
+                                    <td>{{ $item->guru->name }}</td>
+                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
-                    </div> 
+                    </div>
 
                 </div>
             </div>

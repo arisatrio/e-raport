@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\MTahunAjaran;
+use App\Models\MMapelJurusan;
+use App\Models\MMapelUmum;
+
 class HomeController extends Controller
 {
     public function __construct()
@@ -28,6 +32,12 @@ class HomeController extends Controller
 
     public function homeMurid()
     {
-        return view('_murid.dashboard');
+        $ta = MTahunAjaran::where('status', 1)->first();
+        $mapelJurusan = MMapelJurusan::where('tingkat', auth()->user()->siswaKelas->first()->tingkat)->get();
+        $mapelUmum = MMapelUmum::all();
+
+        $mapel = $mapelJurusan->concat($mapelUmum);
+
+        return view('_murid.dashboard', compact('ta', 'mapel'));
     } 
 }

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Models\MMapelJurusan;
 use App\Models\MJurusan;
+use App\Models\User;
 
 class MMapelJurusanController extends Controller
 {
@@ -18,9 +19,10 @@ class MMapelJurusanController extends Controller
     public function index()
     {
         $jurusan = MJurusan::all();
-        $mapel = MMapelJurusan::with('mapelJurusan')->get();
+        $mapel = MMapelJurusan::with('mapelJurusan', 'guru')->get();
+        $guru = User::where('role_id', 3)->get();
 
-        return view('_admin.MMapelJurusan.index', compact('jurusan', 'mapel'));
+        return view('_admin.MMapelJurusan.index', compact('jurusan', 'mapel', 'guru'));
     }
 
     /**
@@ -33,6 +35,7 @@ class MMapelJurusanController extends Controller
     {
         $data = $this->validate($request, [
             'm_jurusans_id' => 'required',
+            'guru_id'   => 'required',
             'golongan'  => 'required',
             'mapel'     => 'required',
             'tingkat'   => 'required',

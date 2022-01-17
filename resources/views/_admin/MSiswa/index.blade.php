@@ -3,12 +3,12 @@
 @section('content')
 <x-page-header>
     @slot('page_title')
-        Data Guru
+        Data Siswa
     @endslot
     @slot('breadcrumb')
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-            <li class="breadcrumb-item">Data Guru</li>
+            <li class="breadcrumb-item">Data Siswa</li>
         </ol>
     @endslot
 </x-page-header>

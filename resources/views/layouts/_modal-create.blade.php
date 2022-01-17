@@ -85,6 +85,15 @@
                             <label for="email1" class="col-sm-4 control-label col-form-label">KKM</label>
                             <input type="number" class="form-control col-sm-8" name="kkm" required>
                         </div>
+                        <div class="form-group row">
+                            <label for="email1" class="col-sm-4 control-label col-form-label">Guru</label>
+                            <select class="form-control col-sm-8" name="guru_id">
+                                <option selected disabled>--Guru--</option>
+                                @foreach ($guru as $item)
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     @elseif($data === 'Mata Pelajaran Kejuruan')
                         <div class="form-group row">
                             <label for="email1" class="col-sm-4 control-label col-form-label">Jurusan</label>
@@ -120,6 +129,15 @@
                         <div class="form-group row">
                             <label for="email1" class="col-sm-4 control-label col-form-label">KKM</label>
                             <input type="number" class="form-control col-sm-8" name="kkm" required>
+                        </div>
+                        <div class="form-group row">
+                            <label for="email1" class="col-sm-4 control-label col-form-label">Guru</label>
+                            <select class="form-control col-sm-8" name="guru_id">
+                                <option selected disabled>--Guru--</option>
+                                @foreach ($guru as $item)
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     @elseif($data === 'Ekstrakulikuler')
                         <div class="form-group row">
