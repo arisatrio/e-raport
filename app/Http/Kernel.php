@@ -68,5 +68,6 @@ class Kernel extends HttpKernel
         'walas' => \App\Http\Middleware\Walas::class,
         'guru' => \App\Http\Middleware\Guru::class,
         'murid' => \App\Http\Middleware\Murid::class,
+        'gurubk' => \App\Http\Middleware\GuruBk::class,
     ];
 }

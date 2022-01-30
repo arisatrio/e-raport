@@ -25,7 +25,7 @@
             <p>Akun Wali Kelas login ke sistem menggunakan Username <b>tingkat-kode jurusan-ruangan-tahun ajaran</b> (format huruf kecil) dan Password <b>@123456</b>. <br> <i>Contoh: Username <b>x-tkj-satu-2021/2022</b> Password <b>@123456</b></i></p>
         </div>
 
-        <x-datatable>
+        {{-- <x-datatable>
             @slot('header')
                 <button class="btn btn-success" data-toggle="modal" data-target="#modal-create"><i class="fas fa-plus"></i> Tambah Kelas</button>
                 @include('layouts._modal-create',['data' => 'Kelas Siswa', 'route' => 'admin.kelas-siswa.store'])
@@ -42,29 +42,26 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($kelas as $item)
-                        @foreach ($item->waliKelas as $walas)
-                        <tr>
-                            <td>{{$loop->iteration}}</td>
-                            <td>{{$walas->pivot->ta}}</td>
-                            <td>{{$item->tingkat}} {{$item->jurusan->kode_jurusan}} / {{$item->ruangan}}</td>
-                            <td>{{$walas->name}}</td>
-                            <td>
-                                <a href="{{ route('admin.kelas-siswa.show', $item->id) }}" class="btn btn-info bg-kaneza" ><i class="mdi mdi-account-plus"></i> Tambah Siswa</a>
-                                <button class="btn btn-secondary" data-toggle="modal" data-target="#modal-detail-{{ $item->id }}"><i class="fas fa-eye"></i></button>
-                                {{-- <button class="btn btn-warning" data-toggle="modal" data-target="#modal-edit-{{ $item->id }}"><i class="fas fa-pencil-alt"></i></button> --}}
-                                <a href="{{ route('admin.kelas-siswa.show', $item->id) }}" class="btn btn-warning"><i class="fas fa-eye"></i></a>
-                                <button class="btn btn-danger" data-toggle="modal" data-target="#modal-delete-{{ $item->id }}"><i class="fas fa-trash"></i></button>
-                                {{-- @include('layouts._modal-show', ['data' => 'Kelas Siswa'])
-                                @include('layouts._modal-edit', ['data' => 'Ekstrakulikuler', 'route' => 'admin.ekstrakulikuler.update'])
-                                @include('layouts._modal-delete',['data' => 'Ekstrakulikuler', 'itemDel' => $item->nama_eskul, 'route' => 'admin.ekstrakulikuler.destroy']) --}}
-                            </td>
-                        </tr>                        
-                        @endforeach
-                    @endforeach
+                    
                 </tbody>
             @endslot
-        </x-datatable>
+        </x-datatable> --}}
+
+        <table id="dttable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+            <thead class="bg-kaneza text-white">
+                <tr>
+                    <th width="5%">No</th>
+                    <th>Tahun Ajaran</th>
+                    <th>Kelas</th>
+                    <th>Wali Kelas</th>
+                    <th width="15%">Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+
     @endslot
 
 </x-page-content>
@@ -72,12 +69,30 @@
 @endsection
 @push('extra-css')
     @include('layouts.datatable-css')
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/libs/select2/dist/css/select2.min.css') }}">
 @endpush
 @push('extra-js')
     @include('layouts.datatable-js')
+    <script src="{{ asset('assets/libs/select2/dist/js/select2.min.js') }}"></script>
     <script>
+        var dttable = $('#dttable').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "",
+            columns: [
+                {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false},
+                {data: 'tahun_ajaran', name: 'tahun_ajaran'},
+                {data: 'kelas', name: 'kelas'},
+                {data: 'wali_kelas', name: 'wali_kelas'},
+                {data: 'action', name: 'action', orderable: false, seacrhable: false}
+            ],
+        });
         $(document).ready(function() {
-            $('#datatable').DataTable();
-        } );
+            $('#ta_id').select2({ width: '100%' });
+            $('#m_jurusans_id').select2({ width: '100%' });
+            $('#tingkat').select2({ width: '100%' });
+            $('#ruangan').select2({ width: '100%' });
+            $('#wali_kelas_id').select2({ width: '100%' });
+        });
     </script>
 @endpush

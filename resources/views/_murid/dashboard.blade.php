@@ -26,8 +26,8 @@
                     <p class="mb-0">NISN : {{ auth()->user()->username }}</p>
                     <p class="mb-0">Tahun Angkatan {{ auth()->user()->angkatan }}</p>
                     <small>{{ auth()->user()->alamat }}</small>
-                    {{ auth()->user()->siswaKelas->first()->jurusan->jurusan }}
-                    <p>Kelas {{ auth()->user()->siswaKelas->first()->tingkat }} {{ auth()->user()->siswaKelas->first()->jurusan->kode_jurusan }} {{ auth()->user()->siswaKelas->first()->ruangan }}</p>
+                    {{ auth()->user()->kelasSiswa->first()->kelas->jurusan->jurusan }}
+                    {{-- <p>Kelas {{ auth()->user()->kelasSiswa->first()->tingkat }} {{ auth()->user()->kelasSiswa->first()->jurusan->kode_jurusan }} {{ auth()->user()->siswaKelas->first()->ruangan }}</p> --}}
                 </div>
             </div>
         </div>
@@ -46,30 +46,26 @@
         <div class="col">
             <div class="card shadow">
                 <div class="card-body">
-                    <h4>Mata Pelajaran</h4>
-                    <p>{{ auth()->user()->siswaKelas->first()->tingkat }} {{ auth()->user()->siswaKelas->first()->jurusan->kode_jurusan }} {{ auth()->user()->siswaKelas->first()->ruangan }} / Semester {{ $ta->semester }} {{ $ta->tahun_ajaran }}</p>
+                    <h4>Rapor Saya</h4>
+                    
                     <hr>
 
-                    <div class="table-responsive">
-                        <table class="table table-bordered" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                            <thead class="bg-kaneza text-white">
-                                <tr>
-                                    <th width="5%">No</th>
-                                    <th>Mata Pelajaran</th>
-                                    <th>Guru</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($mapel as $item)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->mapel }}</td>
-                                    <td>{{ $item->guru->name }}</td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                    <form action="{{ route('murid.rapor.index') }}" method="GET">
+                        <div class="row">
+                            <div class="form-group col-9">
+                                <select class="form-control select2" name="kelas_id" id="kelas_id">
+                                    <option selected disabled>--Pilih Kelas--</option>
+                                    @foreach ($kelasSiswa as $item)
+                                        <option value="{{ $item->id }}">{{ $item->tingkat }} {{ $item->jurusan->jurusan }} / {{ $item->ruangan }} - {{ $item->tahunAjaran->tahun_ajaran }} {{ $item->tahunAjaran->semester }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="col-3">
+                                <button type="submit" class="btn btn-primary btn-block bg-kaneza">Cari</button>
+                            </div>
+                        </div>
+                    </form>
 
                 </div>
             </div>

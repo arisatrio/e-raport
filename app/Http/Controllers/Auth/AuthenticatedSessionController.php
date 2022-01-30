@@ -40,6 +40,8 @@ class AuthenticatedSessionController extends Controller
             return redirect()->route('guru.dashboard');
         } else if(auth()->user()->role_id === 4) {
             return redirect()->route('murid.dashboard');
+        } else if(auth()->user()->role_id === 5) {
+            return redirect()->route('guru-bk.dashboard');
         }
 
         // return redirect()->intended(RouteServiceProvider::HOME);

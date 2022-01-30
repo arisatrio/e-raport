@@ -1,22 +1,47 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Guru;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
+use App\Models\MTahunAjaran;
+use App\Models\User;
 use App\Models\KKelas;
 
-class KKelasSiswaController extends Controller
+class NilaiController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $ta = MTahunAjaran::all();
+        $kelas = KKelas::with('jurusan')->get();
+
+
+        if($request->ajax()) {
+            $data = User::whereHas('kelasSiswa')->where('role_id', 4)->get();
+
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('kelas', function ($row) {
+                    return 'X MM / Satu';
+                })
+                ->addColumn('nilai', function ($row) {
+                    return '<span class="badge badge-secondary">80</span>';
+                })
+                ->addColumn('action', function ($row) {
+                    return '<button class="btn btn-success" data-toggle="modal" data-target="#modal-create"><i class="fas fa-plus fa-fw"></i>Tambah Nilai</button>';
+                })
+                ->rawColumns(['nilai', 'action'])
+                ->make(true);
+        }
+
+        return view('_guru.input-nilai', compact('ta', 'kelas'));
     }
 
     /**
@@ -37,18 +62,7 @@ class KKelasSiswaController extends Controller
      */
     public function store(Request $request)
     {
-        $kelas = KKelas::with('siswaKelas')->find($request->idKelas);
-
-        for($i = 0; $i < count($request->selectedSiswa); $i++) {
-            $kelas->siswaKelas()->create([
-                'murid_id'  => $request->selectedSiswa[$i],
-            ]);
-        }
-
-        return response()->json([
-            'success'   => true,
-            'messages'  => 'Success',
-        ]);
+        //
     }
 
     /**

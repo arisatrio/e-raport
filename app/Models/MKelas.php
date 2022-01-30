@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class MKelas extends Model
 {
     use SoftDeletes;
-    protected $fillable = ['m_jurusans_id', 'tingkat', 'ruangan'];
+    protected $fillable = ['m_jurusan_id', 'tingkat', 'ruangan'];
 
     public function jurusan()
     {
-        return $this->belongsTo(MJurusan::class, 'm_jurusans_id');
+        return $this->belongsTo(MJurusan::class, 'm_jurusan_id');
     }
 
     public function waliKelas()

@@ -15,10 +15,11 @@ class CreateKKelasSiswasTable extends Migration
     {
         Schema::create('k_kelas_siswas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('m_kelas_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->string('ta');
+            $table->foreignId('k_kelas_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->unsignedBigInteger('murid_id');
             $table->timestamps();
+
+            $table->foreign('murid_id')->references('id')->on('users');
         });
     }
 

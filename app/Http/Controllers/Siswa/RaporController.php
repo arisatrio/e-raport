@@ -5,9 +5,10 @@ namespace App\Http\Controllers\Siswa;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Models\MTahunAjaran;
 use App\Models\MMapelUmum;
 use App\Models\MMapelJurusan;
+use App\Models\KKelas;
+use App\Models\RAbsensi;
 
 class RaporController extends Controller
 {
@@ -16,13 +17,15 @@ class RaporController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $ta = MTahunAjaran::where('status', 1)->first();
         $mapelUmum = MMapelUmum::all();
         // $mapelJurusan = MMapelJurusan::where('m_jurusan_id', auth()->user()->siswaKelas->first()->);
 
-        return view('_murid.rapor', compact('mapelUmum', 'ta'));
+        $reqKelas = KKelas::with('jurusan', 'tahunAjaran', 'waliKelas', 'siswaKelas')->find($request->kelas_id);
+        $rekapAbsensi = RAbsensi::where('k_kelas_id', $reqKelas->id)->where('murid_id', auth()->user()->id)->first();
+
+        return view('_murid.rapor-show', compact('reqKelas', 'mapelUmum', 'rekapAbsensi'));
     }
 
     /**

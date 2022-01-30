@@ -4,19 +4,31 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
-use App\Models\KKelas;
+use App\Models\User;
 
-class KKelasSiswaController extends Controller
+class MGuruBkController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if($request->ajax()) {
+            $data = User::where('role_id', 5)->get();
+
+            return datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function($row) {
+                    return '-';
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+        return view('_admin.MGuruBk.index');
     }
 
     /**
@@ -37,18 +49,22 @@ class KKelasSiswaController extends Controller
      */
     public function store(Request $request)
     {
-        $kelas = KKelas::with('siswaKelas')->find($request->idKelas);
-
-        for($i = 0; $i < count($request->selectedSiswa); $i++) {
-            $kelas->siswaKelas()->create([
-                'murid_id'  => $request->selectedSiswa[$i],
-            ]);
-        }
-
-        return response()->json([
-            'success'   => true,
-            'messages'  => 'Success',
+        $this->validate($request, [
+            'name'      => 'required',
+            'username'  => 'required|unique:users,username',
+            'email'     => 'required|unique:users,email',
+            'nohp'      => 'required',
         ]);
+        User::create([
+            'role_id'   => 5,
+            'name'      => $request->name,
+            'username'  => $request->username,
+            'email'     => $request->email,
+            'password'  => bcrypt('@123456'),
+            'nohp'      => $request->nohp,
+        ]);
+
+        return redirect()->route('admin.guru-bk.index')->with('messages', 'Data Guru BK berhasil disimpan');
     }
 
     /**

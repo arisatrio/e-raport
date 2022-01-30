@@ -33,6 +33,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::resource('ekstrakulikuler', Controllers\Admin\MEskulController::class)->only(['index', 'store', 'update', 'destroy']);
         //USER
         Route::resource('guru', Controllers\Admin\MGuruController::class)->only(['index', 'store', 'update', 'destroy']);
+        Route::resource('guru-bk', Controllers\Admin\MGuruBkController::class)->only(['index', 'store', 'update', 'destroy']);
         Route::resource('siswa', Controllers\Admin\MSiswaController::class)->only(['index', 'store', 'update', 'destroy']);
     });
 });
@@ -46,6 +47,17 @@ Route::middleware(['auth', 'walas'])->group(function () {
 Route::middleware(['auth', 'guru'])->group(function () {
     Route::prefix('guru')->name('guru.')->group(function (){
         Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'homeGuru'])->name('dashboard');
+        //
+        Route::resource('input-nilai', Controllers\Guru\NilaiController::class);
+    });
+});
+
+Route::middleware(['auth', 'gurubk'])->group(function () {
+    Route::prefix('guru-bk')->name('guru-bk.')->group(function (){
+        Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'homeGuruBk'])->name('dashboard');
+        //
+        Route::resource('input-absensi', Controllers\GuruBk\AbsensiController::class)->except(['show']);
+        Route::get('/input-absensi/{kelas_id}/{murid_id}', [App\Http\Controllers\GuruBk\AbsensiController::class, 'show'])->name('input-absensi.show');
     });
 });
 
@@ -53,6 +65,7 @@ Route::middleware(['auth', 'murid'])->group(function () {
     Route::prefix('murid')->name('murid.')->group(function (){
         Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'homeMurid'])->name('dashboard');
         Route::resource('rapor', Controllers\Siswa\RaporController::class);
+        Route::resource('profile', Controllers\Siswa\ProfileController::class);
     });
 });
 

@@ -29,5 +29,9 @@ class RolesSeeder extends Seeder
         Roles::create([
             'name' => 'Murid',
         ]);
+
+        Roles::create([
+            'name' => 'Guru BK',
+        ]);
     }
 }

@@ -18,50 +18,31 @@
 </div>
 
 <div class="container-fluid">
-
     <div class="row">
         <div class="col">
 
             <div class="card shadow">
                 <div class="card-body">
-                    {{-- <h4>Rapor Saya</h4>
-                    <hr> --}}
-                    <div class="form-group row">
-                        <label for="email1" class="col-sm-2 control-label col-form-label">Pilih Semester</label>
-                        <select class="form-control col-sm-8" name="m_jurusans_id">
-                            <option selected disabled>--Semester--</option>
-                        </select>
-                        
-                        <button type="submit" class="btn btn-block btn-primary bg-kaneza ml-5 col-1">Cari</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card shadow">
-                <div class="card-body">
-                    
-                    <div class="card col-6">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Nama</th>
-                                    <td>: {{ auth()->user()->name }}</td>
-                                </tr>
-                                <tr>
-                                    <th>NIS / NISN</th>
-                                    <td>: 080808 / 080808</td>
-                                </tr>
-                                <tr>
-                                    <th>Kelas</th>
-                                    <td>: {{ auth()->user()->siswaKelas->first()->tingkat }} {{ auth()->user()->siswaKelas->first()->jurusan->kode_jurusan }} {{ auth()->user()->siswaKelas->first()->ruangan }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Semester / Tahun Ajaran</th>
-                                    <td>: {{ $ta->semester }} {{ $ta->tahun_ajaran }}</td>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nama</th>
+                                <td>: {{ auth()->user()->name }}</td>
+                            </tr>
+                            <tr>
+                                <th>NIS / NISN</th>
+                                <td>: 080808 / 080808</td>
+                            </tr>
+                            <tr>
+                                <th>Kelas</th>
+                                <td>: {{ $reqKelas->tingkat }} {{ $reqKelas->jurusan->kode_jurusan }} {{ $reqKelas->ruangan }}</td>
+                            </tr>
+                            <tr>
+                                <th>Tahun Ajaran / Semester</th>
+                                <td>: {{ $reqKelas->tahunAjaran->tahun_ajaran }} {{ $reqKelas->tahunAjaran->semester }}</td>
+                            </tr>
+                        </thead>
+                    </table>
 
                     <hr>
 
@@ -109,15 +90,40 @@
                     </div>
 
                     <h4>B. Catatan Akademik</h4>
-                    <p style="border-style: solid; border-width: 2px; padding: 10px;">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas voluptatibus debitis eligendi blanditiis inventore, explicabo harum mollitia similique quis molestiae.
-                    </p>
+                    <div class="col-12">
+                        <p style="border-style: solid; border-width: 2px; padding: 10px;">
+                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas voluptatibus debitis eligendi blanditiis inventore, explicabo harum mollitia similique quis molestiae.
+                        </p>
+                    </div>
+
+                    <h4>C. Rekap Absensi</h4>
+                    <div class="col-md-3">
+                        <table class="table table-bordered" style="border-collapse: collapse; width: 100%;">
+                            <thead>
+                                <tr>
+                                    <td class="bg-light">Hadir</td>
+                                    <td>@if($rekapAbsensi) {{ $rekapAbsensi->h }} @else <span class="badge badge-warning">Belum di Input</span> @endif</td>
+                                </tr>
+                                <tr>
+                                    <td class="bg-light">Tidak Hadir</td>
+                                    <td>@if($rekapAbsensi) {{ $rekapAbsensi->th }} @else <span class="badge badge-warning">Belum di Input</span> @endif</td>
+                                </tr>
+                                <tr>
+                                    <td class="bg-light">Izin</td>
+                                    <td>@if($rekapAbsensi) {{ $rekapAbsensi->i }} @else <span class="badge badge-warning">Belum di Input</span> @endif</td>
+                                </tr>
+                                <tr>
+                                    <td class="bg-light">Sakit</td>
+                                    <td>@if($rekapAbsensi) {{ $rekapAbsensi->s }} @else <span class="badge badge-warning">Belum di Input</span> @endif</td>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
 
                 </div>
             </div>
 
         </div>
     </div>
-
 </div>
 @endsection

@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Siswa;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Models\KKelas;
-
-class KKelasSiswaController extends Controller
+class ProfileController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +14,7 @@ class KKelasSiswaController extends Controller
      */
     public function index()
     {
-        //
+        return view('_murid.profile');
     }
 
     /**
@@ -37,18 +35,7 @@ class KKelasSiswaController extends Controller
      */
     public function store(Request $request)
     {
-        $kelas = KKelas::with('siswaKelas')->find($request->idKelas);
-
-        for($i = 0; $i < count($request->selectedSiswa); $i++) {
-            $kelas->siswaKelas()->create([
-                'murid_id'  => $request->selectedSiswa[$i],
-            ]);
-        }
-
-        return response()->json([
-            'success'   => true,
-            'messages'  => 'Success',
-        ]);
+        //
     }
 
     /**

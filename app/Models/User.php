@@ -30,6 +30,11 @@ class User extends Authenticatable
         'angkatan',
     ];
 
+    public function getNameAttribute($value)
+    {
+        return strtoupper($value);
+    }
+
     public function isAdmin(){
         return (\Auth::user()->role_id == 1);
     }
@@ -46,20 +51,32 @@ class User extends Authenticatable
         return (\Auth::user()->role_id == 4);
     }
 
-    public function waliKelas()
-    {
-        return $this->belongsToMany(MKelas::class, 'k_kelas')
-        ->using(KKelas::class)
-        ->withPivot('ta')
-        ->withTimestamps();
+    public function isGuruBk(){
+        return (\Auth::user()->role_id == 5);
     }
 
-    public function siswaKelas()
+    public function guruMapel()
     {
-        return $this->belongsToMany(MKelas::class, 'k_kelas_siswas')
-            ->using(KSiswa::class)
-            ->withPivot('ta')
-            ->withTimestamps();
+        return $this->hasMany(MMapelUmum::class, 'guru_id');
+    }
+
+    public function waliKelas()
+    {
+        // return $this->belongsToMany(MKelas::class, 'k_kelas')
+        //     ->using(KKelas::class)
+        //     ->withPivot('ta')
+        //     ->withTimestamps();
+        // return $this->belongsTo()
+    }
+
+    public function kelasSiswa()
+    {
+        return $this->hasMany(KKelasSiswa::class, 'murid_id');
+    }
+
+    public function raporAbsensi()
+    {
+        return $this->hasMany(RAbsensi::class, 'murid_id');
     }
 
     /**

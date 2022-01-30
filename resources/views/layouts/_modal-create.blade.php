@@ -164,30 +164,58 @@
                     @elseif($data === 'Kelas Siswa')
                         <div class="form-group row">
                             <label for="email1" class="col-sm-4 control-label col-form-label">Tahun Ajaran</label>
-                            <select class="form-control col-sm-8" name="ta">
-                                <option selected disabled>--Tahun Ajaran--</option>
-                                @foreach ($ta as $t)
-                                <option value="{{$t->tahun_ajaran}}">{{$t->tahun_ajaran}}</option>
-                                @endforeach
-                            </select>
+                            <div class="col-sm-8">
+                                <select class="form-control select2" name="ta_id" id="ta_id">
+                                    <option selected disabled>--Tahun Ajaran--</option>
+                                    @foreach ($ta as $t)
+                                    <option value="{{$t->id}}">{{$t->tahun_ajaran}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
                         <div class="form-group row">
-                            <label for="email1" class="col-sm-4 control-label col-form-label">Kelas</label>
-                            <select class="form-control col-sm-8" name="m_kelas_id">
-                                <option selected disabled>--Kelas--</option>
-                                @foreach ($kelas as $k)
-                                <option value="{{$k->id}}">{{$k->tingkat}} {{$k->jurusan->kode_jurusan}} / {{$k->ruangan}}</option>
-                                @endforeach
-                            </select>
+                            <label for="email1" class="col-sm-4 control-label col-form-label">Jurusan</label>
+                            <div class="col-sm-8">
+                                <select class="form-control select2" name="m_jurusan_id" id="m_jurusan_id">
+                                    <option selected disabled>--Jurusan--</option>
+                                    @foreach ($jurusan as $item)
+                                    <option value="{{$item->id}}">{{$item->jurusan}} ({{$item->kode_jurusan}})</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="email1" class="col-sm-4 control-label col-form-label">Tingkat</label>
+                            <div class="col-sm-8">
+                                <select class="form-control select2" name="tingkat" id="tingkat">
+                                    <option selected disabled>--Tingkat--</option>
+                                    <option value="X">X</option>
+                                    <option value="XI">XI</option>
+                                    <option value="XII">XII</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="email1" class="col-sm-4 control-label col-form-label">Ruangan</label>
+                            <div class="col-sm-8">
+                                <select class="form-control select2" name="ruangan" id="ruangan">
+                                    <option selected disabled>--Ruangan--</option>
+                                    <option value="Satu">Satu</option>
+                                    <option value="Dua">Dua</option>
+                                    <option value="Tiga">Tiga</option>
+                                </select>
+                            </div>
                         </div>
                         <div class="form-group row">
                             <label for="email1" class="col-sm-4 control-label col-form-label">Wali Kelas</label>
-                            <select class="form-control col-sm-8" name="user_id">
-                                <option selected disabled>--Wali Kelas--</option>
-                                @foreach ($guru as $g)
-                                <option value="{{$g->id}}">{{$g->name}}</option>
-                                @endforeach
-                            </select>
+                            <div class="col-sm-8">
+                                <select class="form-control select2" name="wali_kelas_id" id="wali_kelas_id">
+                                    <option selected disabled>--Wali Kelas--</option>
+                                    @foreach ($guru as $g)
+                                    <option value="{{$g->id}}">{{$g->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
                     @elseif($data === 'Siswa')
                         <div class="form-group row">

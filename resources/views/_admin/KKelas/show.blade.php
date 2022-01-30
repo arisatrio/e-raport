@@ -9,7 +9,7 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
             <li class="breadcrumb-item"><a href="{{ route('admin.kelas-siswa.index') }}">Kelas</a></li>
-            <li class="breadcrumb-item">Kelas {{ $kelas->tingkat }} {{ $kelas->jurusan->kode_jurusan }} / {{ $kelas->ruangan }} {{ $kelas->waliKelas->first()->pivot->ta }}</li>
+            <li class="breadcrumb-item">Kelas {{ $kelas->tingkat }} {{ $kelas->jurusan->kode_jurusan }} / {{ $kelas->ruangan }} {{ $kelas->tahunAjaran->tahun_ajaran }}</li>
         </ol>
     @endslot
 </x-page-header>
@@ -77,24 +77,22 @@
                     <tr>
                         <th width="5%">No</th>
                         <th>Nama Siswa</th>
-                        <th>NISN</th>
+                        <th>NIS</th>
                         <th width="15%">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($siswaKelas as $item)
-                        @foreach ($item->siswaKelas as $s)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $s->name }}</td>
-                            <td>{{ $s->username }}</td>
+                            <td>{{ $item->siswa->name }}</td>
+                            <td>{{ $item->siswa->username }}</td>
                             <td>
                                 <button class="btn btn-secondary" data-toggle="modal" data-target="#modal-detail-{{ $item->id }}"><i class="fas fa-eye"></i></button>
                                 <button class="btn btn-warning" data-toggle="modal" data-target="#modal-edit-{{ $item->id }}"><i class="fas fa-pencil-alt"></i></button>
                                 <button class="btn btn-danger" data-toggle="modal" data-target="#modal-delete-{{ $item->id }}"><i class="fas fa-trash"></i></button>
                             </td>
                         </tr>
-                        @endforeach
                     @endforeach
                 </tbody>
             @endslot
