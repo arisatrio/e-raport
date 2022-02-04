@@ -57,16 +57,13 @@ class User extends Authenticatable
 
     public function guruMapel()
     {
-        return $this->hasMany(MMapelUmum::class, 'guru_id');
+        // return $this->hasMany(MMapelUmum::class, 'guru_id');
+        return $this->hasMany(MMapel::class, 'guru_id');
     }
 
     public function waliKelas()
     {
-        // return $this->belongsToMany(MKelas::class, 'k_kelas')
-        //     ->using(KKelas::class)
-        //     ->withPivot('ta')
-        //     ->withTimestamps();
-        // return $this->belongsTo()
+        return $this->hasMany(KKelas::class, 'wali_kelas_id');
     }
 
     public function kelasSiswa()
@@ -77,6 +74,16 @@ class User extends Authenticatable
     public function raporAbsensi()
     {
         return $this->hasMany(RAbsensi::class, 'murid_id');
+    }
+
+    public function raporCatatan()
+    {
+        return $this->hasMany(RCatatan::class, 'murid_id');
+    }
+
+    public function raporNilai()
+    {
+        return $this->hasMany(RNilai::class, 'murid_id');
     }
 
     /**

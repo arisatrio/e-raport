@@ -1,37 +1,24 @@
 <?php
 
-namespace App\Http\Controllers\Siswa;
+namespace App\Http\Controllers\Guru;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Models\MMapelUmum;
-use App\Models\MMapelJurusan;
-use App\Models\MMapel;
+use App\Models\User;
 use App\Models\KKelas;
-use App\Models\RAbsensi;
 use App\Models\RCatatan;
-use App\Models\RNilai;
 
-class RaporController extends Controller
+class CatatanController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $reqKelas = KKelas::with('jurusan', 'tahunAjaran', 'waliKelas', 'siswaKelas')->find($request->kelas_id);
-        $mapel = MMapel::where('m_jurusan_id', auth()->user()->kelasSiswa->first()->kelas->m_jurusan_id)->orWhereNull('m_jurusan_id')->where('tingkat', $reqKelas->tingkat)->get();
-
-        $raporAbsensi = RAbsensi::where('k_kelas_id', $reqKelas->id)->where('murid_id', auth()->user()->id)->first();
-        $raporCatatan = RCatatan::where('k_kelas_id', $reqKelas->id)->where('murid_id', auth()->user()->id)->first();
-
-        $totalNilai     = RNilai::siswaIs(auth()->user()->id, $reqKelas->id)->sum('nilai_akhir');
-        $rerataNilai    = $totalNilai / $mapel->count();
-
-        return view('_murid.rapor-show', compact('reqKelas', 'mapel', 'raporAbsensi', 'raporCatatan', 'totalNilai', 'rerataNilai'));
+        //
     }
 
     /**
@@ -52,7 +39,18 @@ class RaporController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'catatan'   => 'required',
+        ]);
+
+        RCatatan::updateOrCreate(['murid_id' => $request->murid_id, 'k_kelas_id' => $request->kelas_id],[
+            'm_tahun_ajaran_id' => $request->ta_id,
+            'k_kelas_id'        => $request->kelas_id,
+            'murid_id'          => $request->murid_id,
+            'catatan'           => $request->catatan,
+        ]);
+
+        return redirect('/guru/kelas-saya/create?kelas_id='.$request->kelas_id)->with('messages', 'Data Absensi berhasil disimpan');
     }
 
     /**
@@ -61,9 +59,12 @@ class RaporController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($kelas_id, $murid_id)
     {
-        //
+        $siswa = User::find($murid_id);
+        $kelas = KKelas::with('jurusan', 'tahunAjaran')->find($kelas_id);
+
+        return view('_guru.kelas.create', compact('siswa', 'kelas'));
     }
 
     /**

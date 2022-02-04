@@ -48,7 +48,12 @@ Route::middleware(['auth', 'guru'])->group(function () {
     Route::prefix('guru')->name('guru.')->group(function (){
         Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'homeGuru'])->name('dashboard');
         //
-        Route::resource('input-nilai', Controllers\Guru\NilaiController::class);
+        Route::resource('input-nilai', Controllers\Guru\NilaiController::class)->except(['edit']);
+        Route::get('/input-nilai/{kelas_id}/{murid_id}/{mapel_id}', [App\Http\Controllers\Guru\NilaiController::class, 'edit'])->name('input-nilai.edit');
+        //WALI KELAS
+        Route::resource('kelas-saya', Controllers\Guru\KelasController::class);
+        Route::resource('input-catatan', Controllers\Guru\CatatanController::class)->except(['show']);
+        Route::get('/input-catatan/{kelas_id}/{murid_id}', [App\Http\Controllers\Guru\CatatanController::class, 'show'])->name('input-catatan.show');
     });
 });
 

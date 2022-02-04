@@ -25,6 +25,12 @@
             <p>Akun Wali Kelas login ke sistem menggunakan Username <b>tingkat-kode jurusan-ruangan-tahun ajaran</b> (format huruf kecil) dan Password <b>@123456</b>. <br> <i>Contoh: Username <b>x-tkj-satu-2021/2022</b> Password <b>@123456</b></i></p>
         </div>
 
+        <div style="float:right;margin-bottom:20px; margin-right:15px;">
+            <button class="btn btn-success" data-toggle="modal" data-target="#modal-create"><i class="fas fa-plus"></i> Tambah Kelas</button>
+            @include('layouts._modal-create',['data' => 'Kelas Siswa', 'route' => 'admin.kelas-siswa.store'])
+        </div>
+        <br/>
+
         {{-- <x-datatable>
             @slot('header')
                 <button class="btn btn-success" data-toggle="modal" data-target="#modal-create"><i class="fas fa-plus"></i> Tambah Kelas</button>
@@ -47,21 +53,22 @@
             @endslot
         </x-datatable> --}}
 
-        <table id="dttable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-            <thead class="bg-kaneza text-white">
-                <tr>
-                    <th width="5%">No</th>
-                    <th>Tahun Ajaran</th>
-                    <th>Kelas</th>
-                    <th>Wali Kelas</th>
-                    <th width="15%">Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
+        <div class="table-responsive">
+            <table id="dttable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                <thead class="bg-kaneza text-white">
+                    <tr>
+                        <th width="5%">No</th>
+                        <th>Tahun Ajaran</th>
+                        <th>Kelas</th>
+                        <th>Wali Kelas</th>
+                        <th width="15%">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
 
-            </tbody>
-        </table>
-
+                </tbody>
+            </table>
+        </div>
     @endslot
 
 </x-page-content>

@@ -69,7 +69,6 @@ class AbsensiController extends Controller
                     }
                 })
                 ->addColumn('action', function ($row) {
-                    $button = '<button class="btn btn-success" data-id="'.$row->id.'" data-toggle="modal" data-target="#modal-create">Input/Edit Absensi</button>';
                     $link = '<a href="'.route('guru-bk.input-absensi.show', ['kelas_id' => $row->id, 'murid_id' => $row->siswa->id]).'" class="btn btn-success">Input/Edit Absensi</a>';
 
                     return $link;
@@ -105,11 +104,6 @@ class AbsensiController extends Controller
             'i' => 'required',
             's' => 'required',
         ]);
-
-        // $cek = RAbsensi::where('murid_id', $request->murid_id)->where('k_kelas_id', $request->kelas_id)->first();
-        // if(!$cek) {
-        //     return redirect('/guru-bk/input-absensi?kelas_id='.$request->kelas_id)->with('messages', 'Data Suda');
-        // }
 
         RAbsensi::updateOrCreate(['murid_id' => $request->murid_id, 'k_kelas_id' => $request->kelas_id],[
             'm_tahun_ajaran_id' => $request->ta_id,

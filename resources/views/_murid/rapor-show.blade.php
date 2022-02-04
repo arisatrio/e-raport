@@ -30,8 +30,8 @@
                                 <td>: {{ auth()->user()->name }}</td>
                             </tr>
                             <tr>
-                                <th>NIS / NISN</th>
-                                <td>: 080808 / 080808</td>
+                                <th>NIS</th>
+                                <td>: {{ auth()->user()->username }} / {{ auth()->user()->username }}</td>
                             </tr>
                             <tr>
                                 <th>Kelas</th>
@@ -47,74 +47,138 @@
                     <hr>
 
                     <h4>A. Nilai Akademik</h4>
-
-                    <div class="table-responsive">
-                        <table class="table table-bordered" style="border-collapse: collapse; width: 100%;">
-                            <thead class="bg-light text-bold">
-                                <tr>
-                                    <th width="5%"><b>No</b></th>
-                                    <th><b>Mata Pelajaran</b></th>
-                                    <th><b>Pengetahuan</b></th>
-                                    <th><b>Keterampilan</b></th>
-                                    <th><b>Nilai Akhir</b></th>
-                                    <th><b>Predikat</b></th>
-                                    <th><b>Sikap</b></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><b>A</b></td>
-                                    <td colspan="6"><b>Muatan Nasional</b></td>
-                                </tr>
-                                @foreach ($mapelUmum as $item)
+                    <div class="col-12">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" style="border-collapse: collapse; width: 100%;">
+                                <thead class="bg-light text-bold">
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->mapel }}</td>
-                                        <td class="text-center">90</td>
-                                        <td class="text-center">70</td>
-                                        <td class="text-center">88</td>
-                                        <td class="text-center">B+</td>
-                                        <td class="text-center">B</td>
+                                        <th width="5%"><b>No</b></th>
+                                        <th><b>Mata Pelajaran</b></th>
+                                        <th><b>Pengetahuan</b></th>
+                                        <th><b>Keterampilan</b></th>
+                                        <th><b>Nilai Akhir</b></th>
+                                        <th><b>Predikat</b></th>
+                                        <th><b>Sikap</b></th>
                                     </tr>
-                                @endforeach
-                                <tr>
-                                    <td><b>B</b></td>
-                                    <td colspan="6"><b>Muatan Kewilayahan</b></td>
-                                </tr>
-                                <tr>
-                                    <td><b>C</b></td>
-                                    <td colspan="6"><b>Muatan Peminatan Kejuruan</b></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td colspan="7"><b>A. Muatan Nasional</b></td>
+                                    </tr>
+                                    @foreach ($mapel->where('golongan', 'A. Muatan Nasional') as $item)
+                                        @php
+                                            $nilai = $item->nilaiRapor()->siswaIs(auth()->user()->id, $reqKelas->id)->first()
+                                        @endphp
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $item->mapel }}</td>
+                                            <td class="text-center">{{ $nilai->pengetahuan ?? '-' }}</td>
+                                            <td class="text-center">{{ $nilai->keterampilan ?? '-' }}</td>
+                                            <td class="text-center">{{ $nilai->nilai_akhir ?? '-' }}</td>
+                                            <td class="text-center">{{ $nilai->predikat ?? '-' }}</td>
+                                            <td class="text-center">{{ $nilai->sikap ?? '-' }}</td>
+                                        </tr>
+                                    @endforeach
+                                    <tr>
+                                        <td colspan="7"><b>B. Muatan Kewilayahan</b></td>
+                                    </tr>
+                                    @foreach ($mapel->where('golongan', 'B. Muatan Kewilayahan') as $item)
+                                        @php
+                                            $nilai = $item->nilaiRapor()->siswaIs(auth()->user()->id, $reqKelas->id)->first()
+                                        @endphp
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $item->mapel }}</td>
+                                            <td class="text-center">{{ $nilai->pengetahuan ?? '-' }}</td>
+                                            <td class="text-center">{{ $nilai->keterampilan ?? '-' }}</td>
+                                            <td class="text-center">{{ $nilai->nilai_akhir ?? '-' }}</td>
+                                            <td class="text-center">{{ $nilai->predikat ?? '-' }}</td>
+                                            <td class="text-center">{{ $nilai->sikap ?? '-' }}</td>
+                                        </tr>
+                                    @endforeach
+                                    <tr>
+                                        <td colspan="7"><b>C. Muatan Peminatan Kejuruan</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="7"><b>{{ $mapel->whereNotNull('m_jurusan_id')->first()->golongan }}</b></td>
+                                    </tr>
+                                    @foreach ($mapel->whereNotNull('m_jurusan_id') as $item)
+                                        @php
+                                            $nilai = $item->nilaiRapor()->siswaIs(auth()->user()->id, $reqKelas->id)->first()
+                                        @endphp
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $item->mapel }}</td>
+                                            <td class="text-center">{{ $nilai->pengetahuan ?? '-' }}</td>
+                                            <td class="text-center">{{ $nilai->keterampilan ?? '-' }}</td>
+                                            <td class="text-center">{{ $nilai->nilai_akhir ?? '-' }}</td>
+                                            <td class="text-center">{{ $nilai->predikat ?? '-' }}</td>
+                                            <td class="text-center">{{ $nilai->sikap ?? '-' }}</td>
+                                        </tr>
+                                    @endforeach
+                                    <tr>
+                                        <td colspan="7"></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4"><b>Total Nilai</b></td>
+                                        <td colspan="3"><b>{{ $totalNilai }}</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4"><b>Rata-rata</b></td>
+                                        <td colspan="3"><b>{{ $rerataNilai }}</b></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
 
                     <h4>B. Catatan Akademik</h4>
                     <div class="col-12">
-                        <p style="border-style: solid; border-width: 2px; padding: 10px;">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas voluptatibus debitis eligendi blanditiis inventore, explicabo harum mollitia similique quis molestiae.
+                        @if($raporCatatan)
+                        <p style="border-style: solid; border-width: 2px; padding: 20px; border-color: #DEE2E6">
+                            {{ $raporCatatan->catatan }}
                         </p>
+                        @else
+                            -
+                        @endif
+                    </div>
+                    <div class="col-md-12">
+                        <table class="table table-bordered" style="border-collapse: collapse; width: 100%;">
+                            <thead>
+                                <tr>
+                                    <td rowspan="3" class="bg-light align-middle">Ekstrakulikuler</td>
+                                </tr>
+                                <tr>
+                                    <td>1. CEK</td>
+                                    <td>A</td>
+                                </tr>
+                                <tr>
+                                    <td>1. CEK</td>
+                                    <td>B</td>
+                                </tr>
+                            </thead>
+                        </table>
                     </div>
 
                     <h4>C. Rekap Absensi</h4>
                     <div class="col-md-3">
                         <table class="table table-bordered" style="border-collapse: collapse; width: 100%;">
                             <thead>
-                                <tr>
+                                {{-- <tr>
                                     <td class="bg-light">Hadir</td>
-                                    <td>@if($rekapAbsensi) {{ $rekapAbsensi->h }} @else <span class="badge badge-warning">Belum di Input</span> @endif</td>
-                                </tr>
+                                    <td>@if($raporAbsensi) {{ $raporAbsensi->h }} @else - @endif</td>
+                                </tr> --}}
                                 <tr>
                                     <td class="bg-light">Tidak Hadir</td>
-                                    <td>@if($rekapAbsensi) {{ $rekapAbsensi->th }} @else <span class="badge badge-warning">Belum di Input</span> @endif</td>
+                                    <td>@if($raporAbsensi) {{ $raporAbsensi->th }} @else - @endif</td>
                                 </tr>
                                 <tr>
                                     <td class="bg-light">Izin</td>
-                                    <td>@if($rekapAbsensi) {{ $rekapAbsensi->i }} @else <span class="badge badge-warning">Belum di Input</span> @endif</td>
+                                    <td>@if($raporAbsensi) {{ $raporAbsensi->i }} @else - @endif</td>
                                 </tr>
                                 <tr>
                                     <td class="bg-light">Sakit</td>
-                                    <td>@if($rekapAbsensi) {{ $rekapAbsensi->s }} @else <span class="badge badge-warning">Belum di Input</span> @endif</td>
+                                    <td>@if($raporAbsensi) {{ $raporAbsensi->s }} @else - @endif</td>
                                 </tr>
                             </thead>
                         </table>

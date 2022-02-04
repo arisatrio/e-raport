@@ -78,6 +78,15 @@
                             </select>
                         </div>
                         <div class="form-group row">
+                            <label for="email1" class="col-sm-4 control-label col-form-label">Tingkat</label>
+                            <select class="form-control col-sm-8" name="tingkat">
+                                <option selected disabled>--Tingkat--</option>
+                                <option value="X">X</option>
+                                <option value="XI">XI</option>
+                                <option value="XII">XII</option>
+                            </select>
+                        </div>
+                        <div class="form-group row">
                             <label for="email1" class="col-sm-4 control-label col-form-label">Mata Pelajaran</label>
                             <input type="text" class="form-control col-sm-8" name="mapel" required>
                         </div>
@@ -97,7 +106,7 @@
                     @elseif($data === 'Mata Pelajaran Kejuruan')
                         <div class="form-group row">
                             <label for="email1" class="col-sm-4 control-label col-form-label">Jurusan</label>
-                            <select class="form-control col-sm-8" name="m_jurusans_id">
+                            <select class="form-control col-sm-8" name="m_jurusan_id">
                                 <option selected disabled>--Jurusan--</option>
                                 @foreach ($jurusan as $jur)
                                 <option value="{{$jur->id}}">{{$jur->jurusan}}</option>
