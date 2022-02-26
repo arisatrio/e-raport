@@ -50,9 +50,25 @@
                             </thead>
                         </table>
                     </div>
+                    <div class="alert alert-success">
+                        <p>Masukkan nilai dalam format puluhan.</p>
+                    </div>
 
                     <form action="{{ route('guru.input-catatan.store') }}" method="POST">
                         @csrf
+                        <div class="form-group row">
+                            <label for="" class="col-2">Ekstrakulikuler</label>
+                            <select class="form-control col-10" name="eskul_id">
+                                <option selected disabled>--Pilih Ekstrakulikuler--</option>
+                                @foreach ($eskul as $item)
+                                <option value="{{ $item->id }}">{{ $item->nama_eskul }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group row">
+                            <label for="" class="col-2">Nilai Ekstrakulikuler</label>
+                            <input type="number" class="form-control col-10" name="nilai_eskul">
+                        </div>
                         <div class="form-group row">
                             <label for="" class="col-2">Catatan</label>
                             <textarea class="form-control col-10" name="catatan" cols="30" rows="5"></textarea>

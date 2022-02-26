@@ -12,13 +12,6 @@
     
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon.ico') }}">
     <title>E-RAPOR - SMKN 1 Jatibarang</title>
-
-    <!-- Custom CSS -->
-    {{-- <link href="{{ asset('assets/libs/chartist/dist/chartist.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/extra-libs/c3/c3.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/libs/sweetalert2/dist/sweetalert2.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css') }}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/libs/select2/dist/css/select2.min.css') }}"> --}}
     <link href="{{asset('assets/extra-libs/pace-progress/themes/yellow/pace-theme-flash.css')}}" rel="stylesheet">
     
     @stack('extra-css')

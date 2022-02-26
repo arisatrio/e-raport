@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Siswa;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Models\User;
+
 class ProfileController extends Controller
 {
     /**
@@ -69,7 +71,24 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name'      => 'required',
+            'username'  => 'required',
+            'email'     => 'required',
+            'no_hp'     => 'required',
+            'alamat'    => 'required',
+        ]);
+
+        $user = User::find($id);
+        $user->update([
+            'name'      => $request->name,
+            'username'  => $request->username,
+            'email'     => $request->email,
+            'no_hp'     => $request->no_hp,
+            'alamat'    => $request->alamat,
+        ]);
+
+        return redirect()->route('murid.profile.index')->with('messages', 'Data Profile berhasil diperbaharui');
     }
 
     /**

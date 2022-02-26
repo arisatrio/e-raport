@@ -50,9 +50,10 @@
                             <td>{{ $item->username }}</td>
                             <td>{{ $item->angkatan }}</td>
                             <td>
-                                <button class="btn btn-secondary" data-toggle="modal" data-target="#modal-detail-{{ $item->id }}"><i class="fas fa-eye"></i></button>
-                                <button class="btn btn-warning" data-toggle="modal" data-target="#modal-edit-{{ $item->id }}"><i class="fas fa-pencil-alt"></i></button>
+                                <a href="{{ route('admin.siswa.show', $item->id) }}" class="btn btn-secondary"><i class="fas fa-eye"></i></a>
+                                <a href="{{ route('admin.siswa.edit', $item->id) }}" class="btn btn-warning"><i class="fas fa-pencil-alt"></i></a>
                                 <button class="btn btn-danger" data-toggle="modal" data-target="#modal-delete-{{ $item->id }}"><i class="fas fa-trash"></i></button>
+                                @include('layouts._modal-delete',['data' => 'Siswa', 'itemDel' => $item->name, 'route' => 'admin.siswa.destroy'])
                             </td>
                         </tr>
                     @endforeach

@@ -25,13 +25,6 @@ class MJurusanSeeder extends Seeder
                 'jurusan'       => $jurusan[$i],
                 'kode_jurusan'  => $singkatan[$i],
             ]);
-
-            for($j = 0; $j < count($tingkat); $j++) {
-                $jur->kelasJurusan()->create([
-                    'tingkat'   => $tingkat[$j],
-                    'ruangan'   => 'Satu',
-                ]);
-            }
         }
     }
 }

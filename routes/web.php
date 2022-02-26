@@ -27,14 +27,14 @@ Route::middleware(['auth', 'admin'])->group(function () {
         //MASTER
         Route::resource('tahun-ajaran', Controllers\Admin\MTahunAjaranController::class)->only(['index', 'store', 'update', 'destroy']);
         Route::resource('jurusan', Controllers\Admin\MJurusanController::class)->only(['index', 'store', 'update', 'destroy']);
-        Route::resource('kelas', Controllers\Admin\MKelasController::class)->only(['index', 'store', 'update', 'destroy']);
+        // Route::resource('kelas', Controllers\Admin\MKelasController::class)->only(['index', 'store', 'update', 'destroy']);
         Route::resource('mapel-umum', Controllers\Admin\MMapelUmumController::class)->only(['index', 'store', 'update', 'destroy']);
         Route::resource('mapel-jurusan', Controllers\Admin\MMapelJurusanController::class)->only(['index', 'store', 'update', 'destroy']);
         Route::resource('ekstrakulikuler', Controllers\Admin\MEskulController::class)->only(['index', 'store', 'update', 'destroy']);
         //USER
-        Route::resource('guru', Controllers\Admin\MGuruController::class)->only(['index', 'store', 'update', 'destroy']);
-        Route::resource('guru-bk', Controllers\Admin\MGuruBkController::class)->only(['index', 'store', 'update', 'destroy']);
-        Route::resource('siswa', Controllers\Admin\MSiswaController::class)->only(['index', 'store', 'update', 'destroy']);
+        Route::resource('guru', Controllers\Admin\MGuruController::class);
+        Route::resource('guru-bk', Controllers\Admin\MGuruBkController::class);
+        Route::resource('siswa', Controllers\Admin\MSiswaController::class);
     });
 });
 

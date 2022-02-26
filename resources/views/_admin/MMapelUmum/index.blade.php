@@ -32,6 +32,7 @@
                 <thead class="bg-kaneza text-white">
                     <tr>
                         <th width="5%">No</th>
+                        <th>Tingkat</th>
                         <th>Golongan</th>
                         <th>Mata Pelajaran</th>
                         <th>KKM</th>
@@ -43,6 +44,7 @@
                     @foreach ($mapel as $item)
                         <tr>
                             <td>{{$loop->iteration}}</td>
+                            <td>{{ $item->tingkat }}</td>
                             <td>{{$item->golongan}}</td>
                             <td>{{$item->mapel}}</td>
                             <td>{{$item->kkm}}</td>

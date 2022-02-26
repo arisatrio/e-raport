@@ -74,7 +74,7 @@
                                             <td>{{ $item->mapel }}</td>
                                             <td class="text-center">{{ $nilai->pengetahuan ?? '-' }}</td>
                                             <td class="text-center">{{ $nilai->keterampilan ?? '-' }}</td>
-                                            <td class="text-center">{{ $nilai->nilai_akhir ?? '-' }}</td>
+                                            <td class="text-center @if($nilai) @if($nilai->nilai_akhir < $item->kkm) bg-danger text-white @endif @endif ">{{ $nilai->nilai_akhir ?? '-' }}</td>
                                             <td class="text-center">{{ $nilai->predikat ?? '-' }}</td>
                                             <td class="text-center">{{ $nilai->sikap ?? '-' }}</td>
                                         </tr>
@@ -136,7 +136,7 @@
                     <div class="col-12">
                         @if($raporCatatan)
                         <p style="border-style: solid; border-width: 2px; padding: 20px; border-color: #DEE2E6">
-                            {{ $raporCatatan->catatan }}
+                            <i>{{ $raporCatatan->catatan }}</i>
                         </p>
                         @else
                             -
@@ -149,12 +149,8 @@
                                     <td rowspan="3" class="bg-light align-middle">Ekstrakulikuler</td>
                                 </tr>
                                 <tr>
-                                    <td>1. CEK</td>
-                                    <td>A</td>
-                                </tr>
-                                <tr>
-                                    <td>1. CEK</td>
-                                    <td>B</td>
+                                    <td>{{ $raporCatatan->eskul->nama_eskul ?? '-' }}</td>
+                                    <td>{{ $raporCatatan->nilai_eskul ?? '-' }}</td>
                                 </tr>
                             </thead>
                         </table>
@@ -164,10 +160,6 @@
                     <div class="col-md-3">
                         <table class="table table-bordered" style="border-collapse: collapse; width: 100%;">
                             <thead>
-                                {{-- <tr>
-                                    <td class="bg-light">Hadir</td>
-                                    <td>@if($raporAbsensi) {{ $raporAbsensi->h }} @else - @endif</td>
-                                </tr> --}}
                                 <tr>
                                     <td class="bg-light">Tidak Hadir</td>
                                     <td>@if($raporAbsensi) {{ $raporAbsensi->th }} @else - @endif</td>

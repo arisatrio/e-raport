@@ -41,19 +41,30 @@
                         <th>Nama Guru</th>
                         <th>NIP</th>
                         <th>Email</th>
-                        <th>No HP</th>
                         <th width="15%">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-
+                    @foreach ($guru as $item)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $item->name }}</td>
+                            <td>{{ $item->username }}</td>
+                            <td>{{ $item->email }}</td>
+                            <td>
+                                <a href="{{ route('admin.guru-bk.show', $item->id) }}" class="btn btn-secondary"><i class="fas fa-eye"></i></a>
+                                <a href="{{ route('admin.guru-bk.edit', $item->id) }}" class="btn btn-warning"><i class="fas fa-pencil-alt"></i></a>
+                                <button class="btn btn-danger" data-toggle="modal" data-target="#modal-delete-{{ $item->id }}"><i class="fas fa-trash"></i></button>
+                                @include('layouts._modal-delete',['data' => 'Guru', 'itemDel' => $item->name, 'route' => 'admin.guru-bk.destroy'])
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
     @endslot
 
 </x-page-content>
-
 @endsection
 @push('extra-css')
     @include('layouts.datatable-css')
@@ -61,18 +72,6 @@
 @push('extra-js')
     @include('layouts.datatable-js')
     <script>
-        var dttable = $('#dttable').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: "",
-            columns: [
-                {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false},
-                {data: 'name', name: 'name'},
-                {data: 'username', name: 'username'},
-                {data: 'email', name: 'email'},
-                {data: 'nohp', name: 'nohp'},
-                {data: 'action', name: 'action', orderable: false, seacrhable: false}
-            ],
-        });
+        var dttable = $('#dttable').DataTable();
     </script>
 @endpush

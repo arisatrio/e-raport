@@ -36,6 +36,7 @@ class MSiswaController extends Controller
             'username'  => 'required|unique:users,username',
             'angkatan'  => 'required'
         ]);
+
         User::create([
             'role_id'   => 4,
             'name'      => $request->name,
@@ -56,7 +57,9 @@ class MSiswaController extends Controller
      */
     public function show($id)
     {
-        //
+        $murid = User::find($id);
+
+        return view('_admin.MSiswa.show', compact('murid'));
     }
 
     /**
@@ -67,7 +70,9 @@ class MSiswaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $murid = User::find($id);
+
+        return view('_admin.MSiswa.edit', compact('murid'));
     }
 
     /**
@@ -79,7 +84,23 @@ class MSiswaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name'      => 'required',
+            'username'  => 'required',
+            'email'     => 'required',
+            'nohp'      => 'required',
+        ]);
+
+        $murid = User::find($id);
+        $murid->update([
+            'name'      => $request->name,
+            'username'  => $request->username,
+            'email'     => $request->email,
+            'nohp'      => $request->nohp,
+            'alamat'    => $request->alamat,
+        ]);
+
+        return redirect()->route('admin.siswa.index')->with('messages', 'Data siswa berhasil diperbaharui');
     }
 
     /**
@@ -90,6 +111,9 @@ class MSiswaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $murid = User::find($id);
+        $murid->delete();
+
+        return redirect()->route('admin.siswa.index')->with('messages', 'Data siswa berhasil dihapus');
     }
 }

@@ -39,15 +39,13 @@ class HomeController extends Controller
     public function homeMurid()
     {
         $ta = MTahunAjaran::where('status', 1)->first();
-        $mapelJurusan = MMapelJurusan::where('tingkat', auth()->user()->kelasSiswa->first()->tingkat)->get();
-        $mapelUmum = MMapelUmum::all();
 
-        $mapel = $mapelJurusan->concat($mapelUmum);
+        // $mapel = $mapelJurusan->concat($mapelUmum);
 
         $kelasSiswa = KKelas::whereHas('siswaKelas', function ($q) {
             $q->where('murid_id', auth()->user()->id);
         })->get();
 
-        return view('_murid.dashboard', compact('ta', 'mapel', 'kelasSiswa'));
+        return view('_murid.dashboard', compact('ta', 'kelasSiswa'));
     } 
 }

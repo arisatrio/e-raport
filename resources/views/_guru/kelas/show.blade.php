@@ -80,7 +80,9 @@
                                     <th width="5%">No</th>
                                     <th>Nama Siswa</th>
                                     <th>NIS</th>
-                                    <th>Catatan</th>
+                                    <th>Estrakulikuler</th>
+                                    <th>Nilai Estrakulikuler</th>
+                                    <th>Catatan Akademik</th>
                                     <th width="15%">Aksi</th>
                                 </tr>
                             </thead>
@@ -114,6 +116,8 @@
                 {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false},
                 {data: 'nama', name: 'nama'},
                 {data: 'nis', name: 'nis'},
+                {data: 'eskul', name: 'eskul'},
+                {data: 'nilai_eskul', name: 'nilai_eskul'},
                 {data: 'catatan', name: 'catatan'},
                 {data: 'action', name: 'action', orderable: false, seacrhable: false}
             ],

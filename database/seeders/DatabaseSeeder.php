@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
             MTahunAjaranSeeder::class,
             MJurusanSeeder::class,
             MEskulSeeder::class,
+            MapelJurusanSeeder::class,
+            MapelSeeder::class,
         ]);
     }
 }

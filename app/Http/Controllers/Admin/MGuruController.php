@@ -48,6 +48,32 @@ class MGuruController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $guru = User::find($id);
+
+        return view('_admin.MGuru.show', compact('guru'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $guru = User::find($id);
+
+        return view('_admin.MGuru.edit', compact('guru'));
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -56,7 +82,23 @@ class MGuruController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name'      => 'required',
+            'username'  => 'required',
+            'email'     => 'required',
+            'nohp'      => 'required',
+        ]);
+
+        $guru = User::find($id);
+        $guru->update([
+            'name'      => $request->name,
+            'username'  => $request->username,
+            'email'     => $request->email,
+            'nohp'      => $request->nohp,
+            'alamat'    => $request->alamat,
+        ]);
+
+        return redirect()->route('admin.guru.index')->with('messages', 'Data Guru berhasil diperbaharui');
     }
 
     /**
@@ -67,6 +109,9 @@ class MGuruController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $guru = User::find($id);
+        $guru->delete();
+
+        return redirect()->route('admin.guru.index')->with('messages', 'Data Guru berhasil dihapus');
     }
 }

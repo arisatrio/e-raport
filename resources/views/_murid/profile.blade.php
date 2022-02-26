@@ -23,26 +23,31 @@
 
             <div class="card shadow">
                 <div class="card-body">
-                    <div class="form-group row">
-                        <label for="email1" class="col-sm-2 control-label col-form-label">Nama</label>
-                        <input type="text" class="form-control col-sm-10" name="nama" value="{{ auth()->user()->name }}" required>
-                    </div>
-                    <div class="form-group row">
-                        <label for="email1" class="col-sm-2 control-label col-form-label">NISN</label>
-                        <input type="text" class="form-control col-sm-10" name="username" value="{{ auth()->user()->username }}" required>
-                    </div>
-                    <div class="form-group row">
-                        <label for="email1" class="col-sm-2 control-label col-form-label">Email</label>
-                        <input type="text" class="form-control col-sm-10" name="email" value="{{ auth()->user()->email }}" required>
-                    </div>
-                    <div class="form-group row">
-                        <label for="email1" class="col-sm-2 control-label col-form-label">No HP</label>
-                        <input type="text" class="form-control col-sm-10" name="no_hp" value="{{ auth()->user()->nohp }}" required>
-                    </div>
-                    <div class="form-group row">
-                        <label for="email1" class="col-sm-2 control-label col-form-label">Alamat</label>
-                        <textarea class="form-control col-sm-10" name="alamat" cols="30" rows="5"></textarea>
-                    </div>
+                    <form action="{{ route('murid.profile.update', auth()->user()->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <div class="form-group row">
+                            <label for="email1" class="col-sm-2 control-label col-form-label">Nama</label>
+                            <input type="text" class="form-control col-sm-10" name="name" value="{{ auth()->user()->name }}" required>
+                        </div>
+                        <div class="form-group row">
+                            <label for="email1" class="col-sm-2 control-label col-form-label">NISN</label>
+                            <input type="text" class="form-control col-sm-10" name="username" value="{{ auth()->user()->username }}" required>
+                        </div>
+                        <div class="form-group row">
+                            <label for="email1" class="col-sm-2 control-label col-form-label">Email</label>
+                            <input type="text" class="form-control col-sm-10" name="email" value="{{ auth()->user()->email }}" required>
+                        </div>
+                        <div class="form-group row">
+                            <label for="email1" class="col-sm-2 control-label col-form-label">No HP</label>
+                            <input type="text" class="form-control col-sm-10" name="no_hp" value="{{ auth()->user()->nohp }}" required>
+                        </div>
+                        <div class="form-group row">
+                            <label for="email1" class="col-sm-2 control-label col-form-label">Alamat</label>
+                            <textarea class="form-control col-sm-10" name="alamat" cols="30" rows="5">{{ auth()->user()->alamat }}</textarea>
+                        </div>
+                        <button class="btn btn-primary bg-kaneza float-right" type="submit">SIMPAN</button>
+                    </form>
                 </div>
             </div>
 

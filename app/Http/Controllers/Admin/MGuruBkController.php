@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Yajra\DataTables\Facades\DataTables;
 
 use App\Models\User;
 
@@ -17,18 +16,9 @@ class MGuruBkController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->ajax()) {
-            $data = User::where('role_id', 5)->get();
+        $guru = User::where('role_id', 5)->get();
 
-            return datatables::of($data)
-                ->addIndexColumn()
-                ->addColumn('action', function($row) {
-                    return '-';
-                })
-                ->rawColumns(['action'])
-                ->make(true);
-        }
-        return view('_admin.MGuruBk.index');
+        return view('_admin.MGuruBk.index', compact('guru'));
     }
 
     /**
@@ -75,7 +65,9 @@ class MGuruBkController extends Controller
      */
     public function show($id)
     {
-        //
+        $guru = User::find($id);
+
+        return view('_admin.MGuruBk.show', compact('guru'));
     }
 
     /**
@@ -86,7 +78,9 @@ class MGuruBkController extends Controller
      */
     public function edit($id)
     {
-        //
+        $guru = User::find($id);
+
+        return view('_admin.MGuruBk.edit', compact('guru'));
     }
 
     /**
@@ -98,7 +92,23 @@ class MGuruBkController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name'      => 'required',
+            'username'  => 'required',
+            'email'     => 'required',
+            'nohp'      => 'required',
+        ]);
+
+        $guru = User::find($id);
+        $guru->update([
+            'name'      => $request->name,
+            'username'  => $request->username,
+            'email'     => $request->email,
+            'nohp'      => $request->nohp,
+            'alamat'    => $request->alamat,
+        ]);
+
+        return redirect()->route('admin.guru-bk.index')->with('messages', 'Data Guru berhasil diperbaharui');
     }
 
     /**
@@ -109,6 +119,9 @@ class MGuruBkController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $guru = User::find($id);
+        $guru->delete();
+
+        return redirect()->route('admin.guru-bk.index')->with('messages', 'Data Guru berhasil dihapus');
     }
 }

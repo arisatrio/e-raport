@@ -25,9 +25,14 @@
                     <h4>{{ auth()->user()->name }}</h4>
                     <p class="mb-0">NISN : {{ auth()->user()->username }}</p>
                     <p class="mb-0">Tahun Angkatan {{ auth()->user()->angkatan }}</p>
-                    <small>{{ auth()->user()->alamat }}</small>
-                    {{ auth()->user()->kelasSiswa->first()->kelas->jurusan->jurusan }}
-                    {{-- <p>Kelas {{ auth()->user()->kelasSiswa->first()->tingkat }} {{ auth()->user()->kelasSiswa->first()->jurusan->kode_jurusan }} {{ auth()->user()->siswaKelas->first()->ruangan }}</p> --}}
+                    {{-- <small>{{ auth()->user()->alamat }}</small> --}}
+                    {{-- <p class="mb-0">Kelas : 
+                    @if(auth()->user()->kelasSiswa->first())
+                    {{ auth()->user()->kelasSiswa->first()->tingkat }} {{ auth()->user()->kelasSiswa->first()->jurusan->jurusan }} / {{ auth()->user()->kelasSiswa->first()->ruangan }} - {{ auth()->user()->kelasSiswa->first()->tahunAjaran->tahun_ajaran }} {{ auth()->user()->kelasSiswa->first()->tahunAjaran->semester }}
+                    @else
+                    -
+                    @endif
+                    </p> --}}
                 </div>
             </div>
         </div>

@@ -53,6 +53,10 @@
                         </table>
                     </div>
 
+                    <div class="alert alert-success">
+                        <p>Masukkan nilai dalam format puluhan.</p>
+                    </div>
+
                     <form action="{{ route('guru.input-nilai.store') }}" method="POST">
                         @csrf
                         <div class="form-group row">

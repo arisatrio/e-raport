@@ -21,33 +21,6 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
-
-            <div class="card">
-                <div class="card-body">
-
-                    <h4>Cari Kelas</h4>
-                    <hr>
-                
-                    <form action="{{ route('guru-bk.input-absensi.index') }}" method="GET">
-                        <div class="row">
-                            <div class="form-group col-9">
-                                <select class="form-control select2" name="kelas_id" id="kelas_id">
-                                    <option selected disabled>--Kelas--</option>
-                                    @foreach ($kelas as $item)
-                                        <option value="{{ $item->id }}">{{ $item->tahunAjaran->tahun_ajaran }} {{ $item->tahunAjaran->semester }} - {{ $item->tingkat }} {{ $item->jurusan->jurusan }} / {{ $item->ruangan }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div class="col-3">
-                                <button type="submit" class="btn btn-primary btn-block bg-kaneza">Cari</button>
-                            </div>
-                        </div>
-                    </form>
-
-                </div>
-            </div>
-
             @if($reqKelas)
             <div class="card">
                 <div class="card-body">

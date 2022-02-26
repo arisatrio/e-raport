@@ -42,20 +42,36 @@ class KelasController extends Controller
                 ->addColumn('nis', function ($row) {
                     return $row->siswa->username;
                 })
-                ->addColumn('catatan', function ($row) {
-                    $raporIsSet = $row->siswa->raporCatatan->where('k_kelas_id', $row->id)->first();
+                ->addColumn('eskul', function ($row) use($kelas) {
+                    $raporIsSet = $row->siswa->raporCatatan->where('k_kelas_id', $kelas->id)->first();
+                    if($raporIsSet) {
+                        return $raporIsSet->eskul->nama_eskul;
+                    } else {
+                        return '<span class="badge badge-warning">Belum Di Input</span>';
+                    }
+                })
+                ->addColumn('nilai_eskul', function ($row) use($kelas) {
+                    $raporIsSet = $row->siswa->raporCatatan->where('k_kelas_id', $kelas->id)->first();
+                    if($raporIsSet) {
+                        return $raporIsSet->nilai_eskul;
+                    } else {
+                        return '<span class="badge badge-warning">Belum Di Input</span>';
+                    }
+                })
+                ->addColumn('catatan', function ($row) use($kelas) {
+                    $raporIsSet = $row->siswa->raporCatatan->where('k_kelas_id', $kelas->id)->first();
                     if($raporIsSet) {
                         return $raporIsSet->catatan;
                     } else {
                         return '<span class="badge badge-warning">Belum Di Input</span>';
                     }
                 })
-                ->addColumn('action', function ($row) {
-                    $link = '<a href="'.route('guru.input-catatan.show', ['kelas_id' => $row->id, 'murid_id' => $row->siswa->id]).'" class="btn btn-success">Input/Edit Catatan</a>';
+                ->addColumn('action', function ($row) use($kelas) {
+                    $link = '<a href="'.route('guru.input-catatan.show', ['kelas_id' => $kelas->id, 'murid_id' => $row->siswa->id]).'" class="btn btn-success">Input/Edit Catatan</a>';
 
                     return $link;
                 })
-                ->rawColumns(['catatan', 'action'])
+                ->rawColumns(['eskul', 'nilai_eskul', 'catatan', 'action'])
                 ->make(true);
         }
 

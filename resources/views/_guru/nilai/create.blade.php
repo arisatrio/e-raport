@@ -57,8 +57,8 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <td>Keterangan</td>
-                                            <td><b> : Daftar Nilai</b></td>
+                                            <td>KKM</td>
+                                            <td><b> : {{ $mapel->kkm }} / {{ $convertKKM }}</b></td>
                                         </tr>
                                         <tr>
                                             <td>Mata Pelajaran</td>

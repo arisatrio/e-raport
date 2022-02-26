@@ -78,7 +78,7 @@
                         <th width="5%">No</th>
                         <th>Nama Siswa</th>
                         <th>NIS</th>
-                        <th width="15%">Aksi</th>
+                        <th width="5%">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -88,8 +88,8 @@
                             <td>{{ $item->siswa->name }}</td>
                             <td>{{ $item->siswa->username }}</td>
                             <td>
-                                <button class="btn btn-secondary" data-toggle="modal" data-target="#modal-detail-{{ $item->id }}"><i class="fas fa-eye"></i></button>
-                                <button class="btn btn-warning" data-toggle="modal" data-target="#modal-edit-{{ $item->id }}"><i class="fas fa-pencil-alt"></i></button>
+                                {{-- <button class="btn btn-secondary" data-toggle="modal" data-target="#modal-detail-{{ $item->id }}"><i class="fas fa-eye"></i></button>
+                                <button class="btn btn-warning" data-toggle="modal" data-target="#modal-edit-{{ $item->id }}"><i class="fas fa-pencil-alt"></i></button> --}}
                                 <button class="btn btn-danger" data-toggle="modal" data-target="#modal-delete-{{ $item->id }}"><i class="fas fa-trash"></i></button>
                             </td>
                         </tr>
@@ -137,7 +137,7 @@
             $('#btn-save').click(function (e) {
                 e.preventDefault();
                 
-                var selectedSiswa = allSiswaTable.rows('.selected').column(1).data().toArray();
+                var selectedSiswa = allSiswaTable.rows('.selected').data().pluck(1).toArray();
                 var idKelas = '{{ $kelas->id }}';
 
                 $.ajax({

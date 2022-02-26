@@ -36,40 +36,40 @@ class AbsensiController extends Controller
                 ->addColumn('nis', function ($row) {
                     return $row->siswa->username;
                 })
-                ->addColumn('hadir', function ($row) {
-                    $raporIsSet = $row->siswa->raporAbsensi->where('k_kelas_id', $row->id)->first();
+                ->addColumn('hadir', function ($row)  use($reqKelas) {
+                    $raporIsSet = $row->siswa->raporAbsensi->where('k_kelas_id', $reqKelas->id)->first();
                     if($raporIsSet) {
                         return '<span class="badge badge-secondary">'.$raporIsSet->h.'</span>';
                     } else {
                         return '<span class="badge badge-warning">Belum Di Input</span>';
                     }
                 })
-                ->addColumn('th', function ($row) {
-                    $raporIsSet = $row->siswa->raporAbsensi->where('k_kelas_id', $row->id)->first();
+                ->addColumn('th', function ($row) use($reqKelas) {
+                    $raporIsSet = $row->siswa->raporAbsensi->where('k_kelas_id', $reqKelas->id)->first();
                     if($raporIsSet) {
                         return '<span class="badge badge-secondary">'.$raporIsSet->th.'</span>';
                     } else {
                         return '<span class="badge badge-warning">Belum Di Input</span>';
                     }
                 })
-                ->addColumn('izin', function ($row) {
-                    $raporIsSet = $row->siswa->raporAbsensi->where('k_kelas_id', $row->id)->first();
+                ->addColumn('izin', function ($row) use($reqKelas) {
+                    $raporIsSet = $row->siswa->raporAbsensi->where('k_kelas_id', $reqKelas->id)->first();
                     if($raporIsSet) {
                         return '<span class="badge badge-secondary">'.$raporIsSet->i.'</span>';
                     } else {
                         return '<span class="badge badge-warning">Belum Di Input</span>';
                     }
                 })
-                ->addColumn('sakit', function ($row) {
-                    $raporIsSet = $row->siswa->raporAbsensi->where('k_kelas_id', $row->id)->first();
+                ->addColumn('sakit', function ($row) use($reqKelas) {
+                    $raporIsSet = $row->siswa->raporAbsensi->where('k_kelas_id', $reqKelas->id)->first();
                     if($raporIsSet) {
                         return '<span class="badge badge-secondary">'.$raporIsSet->s.'</span>';
                     } else {
                         return '<span class="badge badge-warning">Belum Di Input</span>';
                     }
                 })
-                ->addColumn('action', function ($row) {
-                    $link = '<a href="'.route('guru-bk.input-absensi.show', ['kelas_id' => $row->id, 'murid_id' => $row->siswa->id]).'" class="btn btn-success">Input/Edit Absensi</a>';
+                ->addColumn('action', function ($row) use($reqKelas) {
+                    $link = '<a href="'.route('guru-bk.input-absensi.show', ['kelas_id' => $reqKelas->id, 'murid_id' => $row->siswa->id]).'" class="btn btn-success">Input/Edit Absensi</a>';
 
                     return $link;
                 })

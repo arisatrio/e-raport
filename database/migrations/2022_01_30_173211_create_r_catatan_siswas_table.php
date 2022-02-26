@@ -18,10 +18,13 @@ class CreateRCatatanSiswasTable extends Migration
             $table->foreignId('m_tahun_ajaran_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('k_kelas_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedBigInteger('murid_id');
+            $table->unsignedBigInteger('eskul_id')->nullable();
+            $table->string('nilai_eskul')->nullable();
             $table->text('catatan')->nullable();
             $table->timestamps();
 
             $table->foreign('murid_id')->references('id')->on('users');
+            $table->foreign('eskul_id')->references('id')->on('m_eskuls');
         });
     }
 
